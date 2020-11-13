@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::T_ZCV_EC_OU_LOCAL" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" cacheInvalidationPeriod="NONE" enforceSqlExecution="false" hierarchiesSQLEnabled="false">
+<descriptions defaultDescription="T_ZCV_EC_OU_LOCAL"/>
+<localVariables>
+  <variable id="KEY_DATE" parameter="true">
+    <descriptions defaultDescription="KEY DATE"/>
+    <variableProperties datatype="DATE" mandatory="false" defaultValue="2020-09-23">
+      <valueDomain type="Date"/>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+
+  <variable id="LANGUAGE" parameter="true">
+    <descriptions defaultDescription="Language"/>
+    <variableProperties datatype="NVARCHAR" length="2" mandatory="false" defaultValue="TW">
+      <valueDomain type="StaticList">
+        <listEntry id="TW">
+          <descriptions defaultDescription="TW"/>
+        </listEntry>
+        <listEntry id="CN">
+          <descriptions defaultDescription="CN"/>
+        </listEntry>
+        <listEntry id="US">
+          <descriptions defaultDescription="US"/>
+        </listEntry>
+        <listEntry id="DF">
+          <descriptions defaultDescription="DF"/>
+        </listEntry>
+      </valueDomain>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU">
+    <targetVariable name="LANGUAGE" resourceUri="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU"/>
+    <localVariable>LANGUAGE</localVariable>
+  </mapping>
+</variableMappings>
+<dataSources>
+  <DataSource id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU" type="TABLE_FUNCTION">
+    <resourceUri>ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="EXTERNALCODE"/>
+      <viewAttribute id="EXTERNALCODE_DESC"/>
+      <viewAttribute id="PARENTDEPARTMENT"/>
+      <viewAttribute id="EFFECTIVESTARTDATE"/>
+      <viewAttribute id="EFFECTIVEENDDATE"/>
+    
+      <viewAttribute id="REPORT_CM"/>
+      <viewAttribute id="REPORT_GM"/>
+      <viewAttribute id="REPORT_AREA"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU"/>
+    <filter>&quot;EFFECTIVESTARTDATE&quot;&lt;='$$KEY_DATE$$' and &quot;EFFECTIVEENDDATE&quot;&gt;='$$KEY_DATE$$'</filter>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Projection_1">
+  <attributes>
+    <attribute id="EXTERNALCODE" order="1" descriptionColumnName="EXTERNALCODE_DESC" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EXTERNALCODE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="EXTERNALCODE"/>
+    </attribute>
+    <attribute id="EXTERNALCODE_DESC" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EXTERNALCODE_DESC"/>
+      <keyMapping columnObjectName="Projection_1" columnName="EXTERNALCODE_DESC"/>
+    </attribute>
+    <attribute id="PARENTDEPARTMENT" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PARENTDEPARTMENT"/>
+      <keyMapping columnObjectName="Projection_1" columnName="PARENTDEPARTMENT"/>
+    </attribute>
+  
+    <attribute id="REPORT_CM" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_CM"/>
+  
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_CM"/>
+  
+    </attribute>
+    <attribute id="REPORT_GM" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_GM"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_GM"/>
+    </attribute>
+    <attribute id="REPORT_AREA" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_AREA"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_AREA"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures>
+    <measure id="Number" hidden="false" order="7" aggregationType="sum" measureType="simple" datatype="INTEGER" expressionLanguage="SQL">
+      <formula>1</formula>
+    
+      
+      
+      </measure>
+  </calculatedMeasures>
+  <restrictedMeasures/>
+  <localDimensions>
+    <localDimension id="ORGUNIT_H">
+      <attributeRef xsi:type="DataFoundation:Attribute">EXTERNALCODE</attributeRef>
+      <attributeRef xsi:type="DataFoundation:Attribute">PARENTDEPARTMENT</attributeRef>
+      <hierarchies>
+        <hierarchy xsi:type="Dimension:ParentChildHierarchy" id="ORGUNIT_H" aggregateAllNodes="false" multipleParents="true" orphanedNodesHandling="IGNORE" rootNodeVisibility="ADD_ROOT_NODE_IF_DEFINED" cacheEnabled="true" cycleHandling="BREAKUP" emptyValueIsNull="false">
+          <descriptions defaultDescription="Orgunit Hierarchy"/>
+          <unassignedMemberProperties mode="FALSE"/>
+          <attributeParentPair attribute="EXTERNALCODE" parentAttribute="PARENTDEPARTMENT"/>
+        </hierarchy>
+      </hierarchies>
+    </localDimension>
+    <localDimension id="LEVEL_1">
+      <attributeRef xsi:type="DataFoundation:Attribute">REPORT_CM</attributeRef>
+      <attributeRef xsi:type="DataFoundation:Attribute">REPORT_GM</attributeRef>
+      <attributeRef xsi:type="DataFoundation:Attribute">REPORT_AREA</attributeRef>
+      <hierarchies>
+        <hierarchy xsi:type="Dimension:LeveledHierarchy" id="LEVEL_1" aggregateAllNodes="false" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="NAME_PATH_ENFORCED" cacheEnabled="true" cycleHandling="BREAKUP" emptyValueIsNull="true">
+          <descriptions defaultDescription=""/>
+          <unassignedMemberProperties mode="FALSE"/>
+          <levels>
+            <level levelAttribute="REPORT_CM" levelType="MDLEVEL_TYPE_REGULAR" order="1" orderAttribute="REPORT_CM" sortDirection="ASC"/>
+            <level levelAttribute="REPORT_GM" levelType="MDLEVEL_TYPE_REGULAR" order="2" orderAttribute="REPORT_GM" sortDirection="ASC"/>
+            <level levelAttribute="REPORT_AREA" levelType="MDLEVEL_TYPE_REGULAR" order="3" orderAttribute="REPORT_AREA" sortDirection="ASC"/>
+          </levels>
+        </hierarchy>
+      </hierarchies>
+    </localDimension>
+  </localDimensions>
+
+  <sharedDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="92" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZCV_EC_OU" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="ZCV_EC_OU"/>
+<localVariables>
+  <variable id="VALID_DATE" parameter="true">
+    <descriptions defaultDescription="Org Valid Date"/>
+    <variableProperties datatype="DATE" mandatory="false" defaultValue="2020-10-29">
+      <valueDomain type="Date"/>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+  <variable id="LANGUAGE" parameter="true">
+    <descriptions defaultDescription="Language"/>
+    <variableProperties datatype="NVARCHAR" length="2" mandatory="false" defaultValue="TW">
+      <valueDomain type="StaticList">
+        <listEntry id="TW">
+          <descriptions defaultDescription="TW"/>
+        </listEntry>
+        <listEntry id="CN">
+          <descriptions defaultDescription="CN"/>
+        </listEntry>
+        <listEntry id="US">
+          <descriptions defaultDescription="US"/>
+        </listEntry>
+        <listEntry id="DF">
+          <descriptions defaultDescription="DF"/>
+        </listEntry>
+      </valueDomain>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU">
+    <targetVariable name="LANGUAGE" resourceUri="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU"/>
+    <localVariable>LANGUAGE</localVariable>
+  </mapping>
+</variableMappings>
+<dataSources>
+  <DataSource id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU" type="TABLE_FUNCTION">
+    <resourceUri>ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="EXTERNALCODE"/>
+      <viewAttribute id="EXTERNALCODE_DESC"/>
+      <viewAttribute id="PARENTDEPARTMENT"/>
+      <viewAttribute id="EFFECTIVESTARTDATE"/>
+      <viewAttribute id="EFFECTIVEENDDATE"/>
+    
+      <viewAttribute id="REPORT_CM"/>
+      <viewAttribute id="REPORT_CM_DESC"/>
+      <viewAttribute id="REPORT_CM1"/>
+      <viewAttribute id="REPORT_CM1_DESC"/>
+      <viewAttribute id="REPORT_GM"/>
+      <viewAttribute id="REPORT_GM_DESC"/>
+      <viewAttribute id="REPORT_GM1"/>
+      <viewAttribute id="REPORT_GM1_DESC"/>
+      <viewAttribute id="REPORT_AREA"/>
+      <viewAttribute id="REPORT_AREA_DESC"/>
+      <viewAttribute id="REPORT_AREA1"/>
+      <viewAttribute id="REPORT_AREA1_DESC"/>
+      <viewAttribute id="REPORT_FUNCTION"/>
+      <viewAttribute id="REPORT_FUNCTION_DESC"/>
+      <viewAttribute id="REPORT_FUNCTION1"/>
+      <viewAttribute id="REPORT_FUNCTION1_DESC"/>
+      <viewAttribute id="REPORT_DIVISION"/>
+      <viewAttribute id="REPORT_DIVISION_DESC"/>
+      <viewAttribute id="REPORT_DIVISION1"/>
+      <viewAttribute id="REPORT_DIVISION1_DESC"/>
+      <viewAttribute id="REPORT_DEPARTMENT"/>
+      <viewAttribute id="REPORT_DEPARTMENT_DESC"/>
+      <viewAttribute id="REPORT_DEPARTMENT1"/>
+      <viewAttribute id="REPORT_DEPARTMENT1_DESC"/>
+      <viewAttribute id="REPORT_SECTION"/>
+      <viewAttribute id="REPORT_SECTION_DESC"/>
+      <viewAttribute id="REPORT_SECTION1"/>
+      <viewAttribute id="REPORT_SECTION1_DESC"/>
+      <viewAttribute id="CUST_TYPE"/>
+      <viewAttribute id="HEADOFUNIT"/>
+      <viewAttribute id="CUST_SECRETARY1"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU"/>
+    <filter>&quot;EFFECTIVESTARTDATE&quot; &lt;= '$$VALID_DATE$$' AND '$$VALID_DATE$$' &lt;= &quot;EFFECTIVEENDDATE&quot;</filter>
+  </calculationView>
+</calculationViews>
+<inlineHierarchy xsi:type="Dimension:ParentChildHierarchy" id="ORGUNIT_H" aggregateAllNodes="false" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE_IF_DEFINED" cacheEnabled="true" cycleHandling="BREAKUP" emptyValueIsNull="false">
+  <descriptions defaultDescription="Orgunit Hierarchy"/>
+  <unassignedMemberProperties mode="FALSE"/>
+  <attributeParentPair attribute="EXTERNALCODE" parentAttribute="PARENTDEPARTMENT"/>
+</inlineHierarchy>
+<logicalModel id="Projection_1">
+  <attributes>
+    <attribute id="EXTERNALCODE" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EXTERNALCODE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="EXTERNALCODE"/>
+    </attribute>
+    <attribute id="EXTERNALCODE_DESC" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EXTERNALCODE_DESC"/>
+      <keyMapping columnObjectName="Projection_1" columnName="EXTERNALCODE_DESC"/>
+    </attribute>
+    <attribute id="PARENTDEPARTMENT" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PARENTDEPARTMENT"/>
+      <keyMapping columnObjectName="Projection_1" columnName="PARENTDEPARTMENT"/>
+    </attribute>
+  
+    <attribute id="REPORT_CM" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_CM"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_CM"/>
+    </attribute>
+    <attribute id="REPORT_CM_DESC" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_CM_DESC"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_CM_DESC"/>
+    </attribute>
+    <attribute id="REPORT_CM1" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_CM1"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_CM1"/>
+    </attribute>
+    <attribute id="REPORT_CM1_DESC" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_CM1_DESC"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_CM1_DESC"/>
+    </attribute>
+    <attribute id="REPORT_GM" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_GM"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_GM"/>
+    </attribute>
+    <attribute id="REPORT_GM_DESC" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_GM_DESC"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_GM_DESC"/>
+    </attribute>
+    <attribute id="REPORT_GM1" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_GM1"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_GM1"/>
+    </attribute>
+    <attribute id="REPORT_GM1_DESC" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_GM1_DESC"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_GM1_DESC"/>
+    </attribute>
+    <attribute id="REPORT_AREA" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_AREA"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_AREA"/>
+    </attribute>
+    <attribute id="REPORT_AREA_DESC" order="13" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_AREA_DESC"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_AREA_DESC"/>
+    </attribute>
+    <attribute id="REPORT_AREA1" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_AREA1"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_AREA1"/>
+    </attribute>
+    <attribute id="REPORT_AREA1_DESC" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_AREA1_DESC"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_AREA1_DESC"/>
+    </attribute>
+    <attribute id="REPORT_FUNCTION" order="16" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_FUNCTION"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_FUNCTION"/>
+    </attribute>
+    <attribute id="REPORT_FUNCTION_DESC" order="17" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_FUNCTION_DESC"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_FUNCTION_DESC"/>
+    </attribute>
+    <attribute id="REPORT_FUNCTION1" order="18" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_FUNCTION1"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_FUNCTION1"/>
+    </attribute>
+    <attribute id="REPORT_FUNCTION1_DESC" order="19" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_FUNCTION1_DESC"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_FUNCTION1_DESC"/>
+    </attribute>
+    <attribute id="REPORT_DIVISION" order="20" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DIVISION"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DIVISION"/>
+    </attribute>
+    <attribute id="REPORT_DIVISION_DESC" order="21" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DIVISION_DESC"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DIVISION_DESC"/>
+    </attribute>
+    <attribute id="REPORT_DIVISION1" order="22" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DIVISION1"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DIVISION1"/>
+    </attribute>
+    <attribute id="REPORT_DIVISION1_DESC" order="23" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DIVISION1_DESC"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DIVISION1_DESC"/>
+    </attribute>
+    <attribute id="REPORT_DEPARTMENT" order="24" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPARTMENT"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DEPARTMENT"/>
+    </attribute>
+    <attribute id="REPORT_DEPARTMENT_DESC" order="25" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPARTMENT_DESC"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DEPARTMENT_DESC"/>
+    </attribute>
+    <attribute id="REPORT_DEPARTMENT1" order="26" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPARTMENT1"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DEPARTMENT1"/>
+    </attribute>
+    <attribute id="REPORT_DEPARTMENT1_DESC" order="27" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPARTMENT1_DESC"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DEPARTMENT1_DESC"/>
+    </attribute>
+    <attribute id="REPORT_SECTION" order="28" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_SECTION"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_SECTION"/>
+    </attribute>
+    <attribute id="REPORT_SECTION_DESC" order="29" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_SECTION_DESC"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_SECTION_DESC"/>
+    </attribute>
+    <attribute id="CUST_TYPE" order="30" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CUST_TYPE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUST_TYPE"/>
+    </attribute>
+    <attribute id="HEADOFUNIT" order="31" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HEADOFUNIT"/>
+      <keyMapping columnObjectName="Projection_1" columnName="HEADOFUNIT"/>
+    </attribute>
+    <attribute id="CUST_SECRETARY1" order="32" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CUST_SECRETARY1"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUST_SECRETARY1"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="106" y="229"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

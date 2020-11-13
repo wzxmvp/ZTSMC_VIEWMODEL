@@ -1,0 +1,84 @@
+FUNCTION "ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_021"( )
+ RETURNS TABLE(
+     USERID NVARCHAR(32),
+     FIRSTNAME NVARCHAR(128),
+     LASTNAME NVARCHAR(128),
+     DEPARTMENT NVARCHAR(32),
+     JOBLEVEL NVARCHAR(32),
+     CPNT_ID NVARCHAR(90),
+     CPNT_TITLE_TW NVARCHAR(300),
+     COMPL_DTE VARCHAR(90),
+     EMPCOURCE NVARCHAR(10),
+     COMPL_NUMBER INTEGER
+) 
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+    /*****************************
+        Write your function logic
+    ****************************/
+return
+
+	SELECT 
+		a.USERID,
+		a.FIRSTNAME,
+		a.LASTNAME,
+		a.DEPARTMENT_CODE as "DEPARTMENT",
+		a.JOBLEVEL,
+		b.CPNT_ID,
+		b.CPNT_TITLE_TW,
+		b.COMPL_DTE,
+		case
+		when b.CPNT_ID = 'MG1283' then 'EMP1'
+		when b.CPNT_ID = 'MG1115' then 'EMP2'
+		when b.CPNT_ID = 'MG1656' then 'EMP3'
+		when b.CPNT_ID = 'MG1278' then 'EMP4'
+		when b.CPNT_ID = 'MG1279' then 'EMP5'
+		when b.CPNT_ID = 'MG1280' then 'EMP6'
+		when b.CPNT_ID = 'MG1281' then 'EMP7'
+		when b.CPNT_ID = 'MG0691' then 'EMP8'
+		when b.CPNT_ID = 'MG0579' then 'EMP9'
+		when b.CPNT_ID = 'MG1277' then 'EMP10'
+		else ''
+		end as "EMPCOURCE",
+		b.COMPL_NUMBER
+	FROM "ZTSMC_VIEWMODEL.db::ZTAB_EC_USER" as a
+	left outer join
+		( select 
+			c.STUD_ID,
+			c.CPNT_ID,
+			c.CPNT_TITLE_TW,
+			c.CMPL_STAT_ID,
+			TO_CHAR(COMPL_DTE) as "COMPL_DTE",
+			1 as "COMPL_NUMBER"
+		from 
+            ( select 
+	            d.STUD_ID,
+	            d.CPNT_TITLE_TW,
+	            d.ASSGN_DTE,
+	            e.COMPL_DTE,
+	            e.ENRL_STAT_ID,
+	            e.CMPL_STAT_ID,
+	            e.CPNT_ID
+                from 
+--根據ASSGN_DTE獲取每個學員、每門課程記錄最新的一條記錄。               
+                  ( select 
+	                   STUD_ID,
+	                   CPNT_TITLE_TW,
+	                   max("ASSGN_DTE") as "ASSGN_DTE" 
+                   from "ZTSMC_VIEWMODEL.db::ZTAB_LMS_EMP_TRAIN"
+--                   where "STUD_ID"='000003' 
+                   GROUP BY "STUD_ID","CPNT_TITLE_TW" ) as d
+                   
+                     left outer join 
+                        "ZTSMC_VIEWMODEL.db::ZTAB_LMS_EMP_TRAIN" as e
+                     on d."STUD_ID" = e."STUD_ID"
+			         and d."CPNT_TITLE_TW" = e."CPNT_TITLE_TW"
+			         and d."ASSGN_DTE" = e."ASSGN_DTE"
+            ) as c
+            where c.CMPL_STAT_ID in ('0101','0106','0107')
+--		"ZTSMC_VIEWMODEL.db::ZTAB_LMS_EMP_TRAIN" 
+		) as b
+	on (a.USERID = b.STUD_ID)    
+where a.LEVEL_CODE = '35' or a.LEVEL_CODE = '36';    
+END;

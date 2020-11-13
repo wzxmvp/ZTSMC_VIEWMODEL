@@ -1,0 +1,18 @@
+FUNCTION "ZTSMC_VIEWMODEL.db::ZTFHRLMS_070"( )
+       RETURNS TABLE(
+       	  "INST_ID" NVARCHAR(90)
+       ) 
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+    /*****************************
+        Write your function logic
+    ****************************/
+return
+
+select
+
+"INST_ID"
+from "ZTSMC_VIEWMODEL.db::ZTAB_LMS_TEACHER";
+
+END;

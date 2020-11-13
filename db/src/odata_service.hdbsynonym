@@ -1,0 +1,128 @@
+{
+	"ZTSMC_VIEWMODEL.db::ZTAB_EC_ORG_UNIT": {
+		"target": {
+			"object": "ZTAB_EC_ORG_UNIT",
+			"schema": "ZSCH_ODATA"
+		}
+	},
+	"ZTSMC_VIEWMODEL.db::ZTAB_EC_USER": {
+		"target": {
+			"object": "ZTAB_EC_USER",
+			"schema": "ZSCH_ODATA"
+		}
+	},
+	"ZTSMC_VIEWMODEL.db::ZTAB_LMS_ITEM": {
+		"target": {
+			"object": "ZTAB_LMS_ITEM",
+			"schema": "ZSCH_ODATA"
+		}
+	},
+	"ZTSMC_VIEWMODEL.db::ZTAB_LMS_EMP_IDP": {
+		"target": {
+			"object": "ZTAB_LMS_EMP_IDP",
+			"schema": "ZSCH_ODATA"
+		}
+	},
+	"ZTSMC_VIEWMODEL.db::ZTAB_LMS_EMP_TRAIN": {
+		"target": {
+			"object": "ZTAB_LMS_EMP_TRAIN",
+			"schema": "ZSCH_ODATA"
+		}
+	},
+	"ZTSMC_VIEWMODEL.db::ZTAB_LMS_INSTRUCTOR": {
+		"target": {
+			"object": "ZTAB_LMS_INSTRUCTOR",
+			"schema": "ZSCH_ODATA"
+		}
+	},
+	"ZTSMC_VIEWMODEL.db::ZTAB_LMS_LEARNING_HIS": {
+		"target": {
+			"object": "ZTAB_LMS_LEARNING_HIS",
+			"schema": "ZSCH_ODATA"
+		}
+	},
+	"ZTSMC_VIEWMODEL.db::ZTAB_LMS_SCH_ENROLL": {
+		"target": {
+			"object": "ZTAB_LMS_SCH_ENROLL",
+			"schema": "ZSCH_ODATA"
+		}
+	},
+	"ZTSMC_VIEWMODEL.db::ZTAB_LMS_SCH_OFFERING": {
+		"target": {
+			"object": "ZTAB_LMS_SCH_OFFERING",
+			"schema": "ZSCH_ODATA"
+		}
+	},
+	"ZTSMC_VIEWMODEL.db::ZTAB_LMS_TASKS": {
+		"target": {
+			"object": "ZTAB_LMS_TASKS",
+			"schema": "ZSCH_ODATA"
+		}
+	},
+	"ZTSMC_VIEWMODEL.db::ZTAB_LMS_TEACHER": {
+		"target": {
+			"object": "ZTAB_LMS_TEACHER",
+			"schema": "ZSCH_ODATA"
+		}
+	},
+	"ZTSMC_VIEWMODEL.db::ZTAB_LMS_TRECORD": {
+		"target": {
+			"object": "ZTAB_LMS_TRECORD",
+			"schema": "ZSCH_ODATA"
+		}
+	},
+	"ZTSMC_VIEWMODEL.db::ZTAB_LMS_PROGRAM": {
+		"target": {
+			"object": "ZTAB_LMS_PROGRAM",
+			"schema": "ZSCH_ODATA"
+		}
+	},
+	"ZTSMC_VIEWMODEL.db::ZTAB_LMS_SURVEY": {
+		"target": {
+			"object": "ZTAB_LMS_SURVEY",
+			"schema": "ZSCH_ODATA"
+		}
+	},
+	"ZTSMC_VIEWMODEL.db::ZTAB_LMS_CURRICULUM": {
+		"target": {
+			"object": "ZTAB_LMS_CURRICULUM",
+			"schema": "ZSCH_ODATA"
+		}
+	},
+	"ZTSMC_VIEWMODEL.db::ZTAB_BASIC_PICKLISTV2": {
+		"target": {
+			"object": "ZTAB_BASIC_PICKLISTV2",
+			"schema": "ZSCH_ODATA"
+		}
+	},
+	"ZTSMC_VIEWMODEL.db::ZTAB_RCM_NEW_REPORTS": {
+		"target": {
+			"object": "ZTAB_RCM_NEW_REPORTS",
+			"schema": "ZSCH_ODATA"
+		}
+	},
+	"ZTSMC_VIEWMODEL.db::ZTAB_LMS_SURVEYRATING": {
+		"target": {
+			"object": "ZTAB_LMS_SURVEYRATING",
+			"schema": "ZSCH_ODATA"
+		}
+	},
+	"ZTSMC_VIEWMODEL.db::ZTAB_BASIC_FOPAYGRADE": {
+		"target": {
+			"object": "ZTAB_BASIC_FOPAYGRADE",
+			"schema": "ZSCH_ODATA"
+		}
+	},
+	"ZTSMC_VIEWMODEL.db::ZTAB_LMS_PROGRAM_CURRICULUM": {
+		"target": {
+			"object": "ZTAB_LMS_PROGRAM_CURRICULUM",
+			"schema": "ZSCH_ODATA"
+		}
+	},
+	"ZTSMC_VIEWMODEL.db::ZTAB_EC_JOBCODELEVEL": {
+		"target": {
+			"object": "ZTAB_EC_JOBCODELEVEL",
+			"schema": "ZSCH_ODATA"
+		}
+	}
+}

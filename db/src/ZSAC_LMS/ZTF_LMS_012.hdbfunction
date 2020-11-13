@@ -1,0 +1,85 @@
+FUNCTION "ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_012"( )
+ RETURNS TABLE(
+     USERID NVARCHAR(32),
+     FIRSTNAME NVARCHAR(128),
+     LASTNAME NVARCHAR(128),
+     DEPARTMENT NVARCHAR(32),
+     JOBLEVEL NVARCHAR(32),
+     CUSTOM05 NVARCHAR(128),
+     CPNT_ID NVARCHAR(90),
+     CPNT_TITLE_TW NVARCHAR(300),
+     COMPL_DTE VARCHAR(90),
+     NMPCOURCE NVARCHAR(10),
+     COMPL_NUMBER INTEGER
+) 
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+    /*****************************
+        Write your function logic
+    ****************************/
+return
+
+	SELECT 
+		a.USERID,
+		a.FIRSTNAME,
+		a.LASTNAME,
+		a.DEPARTMENT_CODE as "DEPARTMENT",
+		a.JOBLEVEL,
+		a.CUSTOM05,
+		b.CPNT_ID,
+		b.CPNT_TITLE_TW,
+		b.COMPL_DTE,
+		case
+		when b.CPNT_ID = 'MG1256' then 'NMP1'
+		when b.CPNT_ID = 'MG1393' then 'NMP2'
+		when b.CPNT_ID = 'MG1394' then 'NMP3'
+		when b.CPNT_ID = 'MG1275' then 'NMP4'
+		else ''
+		end as "NMPCOURCE",
+		b.COMPL_NUMBER
+	FROM "ZTSMC_VIEWMODEL.db::ZTAB_EC_USER" as a
+	left outer join
+		( select 
+			c.STUD_ID,
+			c.CPNT_ID,
+			c.CPNT_TITLE_TW,
+			c.CMPL_STAT_ID,
+			TO_CHAR(COMPL_DTE) as "COMPL_DTE",
+			1 as "COMPL_NUMBER"
+		from 
+            ( select 
+	            d.STUD_ID,
+	            d.CPNT_TITLE_TW,
+	            d.ASSGN_DTE,
+	            e.COMPL_DTE,
+	            e.ENRL_STAT_ID,
+	            e.CMPL_STAT_ID,
+	            e.CPNT_ID
+                from 
+--根據ASSGN_DTE獲取每個學員、每門課程記錄最新的一條記錄。               
+                  ( select 
+	                   STUD_ID,
+	                   CPNT_TITLE_TW,
+	                   max("ASSGN_DTE") as "ASSGN_DTE" 
+                   from "ZTSMC_VIEWMODEL.db::ZTAB_LMS_EMP_TRAIN"
+--                   where "STUD_ID"='000003' 
+                   GROUP BY "STUD_ID","CPNT_TITLE_TW" ) as d
+                   
+                     left outer join 
+                        "ZTSMC_VIEWMODEL.db::ZTAB_LMS_EMP_TRAIN" as e
+                     on d."STUD_ID" = e."STUD_ID"
+			         and d."CPNT_TITLE_TW" = e."CPNT_TITLE_TW"
+			         and d."ASSGN_DTE" = e."ASSGN_DTE"
+            ) as c
+            where c.CMPL_STAT_ID in ('0101','0106','0107')
+--		"ZTSMC_VIEWMODEL.db::ZTAB_LMS_EMP_TRAIN" 
+		) as b
+	on (a.USERID = b.STUD_ID)
+	
+	where a."USERID" in (
+	 	 select "STUD_ID" 
+	 	 from "ZTSMC_VIEWMODEL.db::ZTAB_LMS_EMP_TRAIN" 
+	 	 where "CPNT_ID" in ('MG1256','MG1393','MG1394','MG1275') );
+--where a.LEVEL_CODE = '33M' or a.LEVEL_CODE = '34';    
+END;

@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZCV_LMS_081" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="ZTF_LMS_081"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_081" type="TABLE_FUNCTION">
+    <resourceUri>ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_081</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="REPORT_DIVISION_DESC_US"/>
+      <viewAttribute id="PASSPORT_NATIONALITY"/>
+      <viewAttribute id="REPORT_AREA_DESC_TW"/>
+      <viewAttribute id="BUDDY_ID"/>
+      <viewAttribute id="REPORT_DEPARTMENT_DESC_US"/>
+      <viewAttribute id="REPORT_DEPARTMENT1_DESC_US"/>
+      <viewAttribute id="JO_DEPARTMENT_DESC_TW"/>
+      <viewAttribute id="ACT_REPORT_DATE"/>
+      <viewAttribute id="REPORT_DEPSECTY_EMPLOYEEID"/>
+      <viewAttribute id="REPORT_DIVISION"/>
+      <viewAttribute id="OFFICE_ADDRESS"/>
+      <viewAttribute id="LAST_NEWTRAIN_CPNT_NAME"/>
+      <viewAttribute id="REPORT_AREA_DESC_US"/>
+      <viewAttribute id="RECRUITER_PHONE"/>
+      <viewAttribute id="REPORT_DEPARTMENT"/>
+      <viewAttribute id="REPORT_DEPARTMENT1"/>
+      <viewAttribute id="REPORT_FUNCTION1_DESC_US"/>
+      <viewAttribute id="JO_DEPARTMENT_DESC_US"/>
+      <viewAttribute id="EXPC_REPORT_DATE"/>
+      <viewAttribute id="REPORT_DEPLEADER_EMAIL"/>
+      <viewAttribute id="REPORT_FUNCTION1_DESC_TW"/>
+      <viewAttribute id="REPORT_EXTERNALCODE_DESC_TW"/>
+      <viewAttribute id="TRAINING_ADDRESS"/>
+      <viewAttribute id="REPORT_AREA"/>
+      <viewAttribute id="RECRUITER_NAME"/>
+      <viewAttribute id="REPORT_DIVISION1_DESC_TW"/>
+      <viewAttribute id="REPORT_DEPARTMENT_DESC_TW"/>
+      <viewAttribute id="LAST_NEWTRAIN_CPNT_ID"/>
+      <viewAttribute id="REPORT_FUNCTION1"/>
+      <viewAttribute id="JO_DEPARTMENT"/>
+      <viewAttribute id="CANDIDATE_NAME"/>
+      <viewAttribute id="REPORT_DEPLEADER_PHONE"/>
+      <viewAttribute id="REPORT_EXTERNALCODE_DESC_US"/>
+      <viewAttribute id="CUSTOM03"/>
+      <viewAttribute id="USERSSYSID"/>
+      <viewAttribute id="REPORT_DIVISION1_DESC_US"/>
+      <viewAttribute id="PRE_EMPLOYEEID"/>
+      <viewAttribute id="REPORT_FUNCTION_DESC_TW"/>
+      <viewAttribute id="LAST_NEWTRAIN_STATUS"/>
+      <viewAttribute id="EXPC_RETURN_TIME"/>
+      <viewAttribute id="REPORT_DEPLEADER_NAME"/>
+      <viewAttribute id="REPORT_EXTERNALCODE"/>
+      <viewAttribute id="CUSTOM02"/>
+      <viewAttribute id="REPORT_DEPSECTY_EMAIL"/>
+      <viewAttribute id="REPORT_DIVISION1"/>
+      <viewAttribute id="PRE_LEAVE_DATE"/>
+      <viewAttribute id="REPORT_FUNCTION_DESC_US"/>
+      <viewAttribute id="NEW_IDENTITY"/>
+      <viewAttribute id="BUDDY_PHONE"/>
+      <viewAttribute id="REPORT_DEPLEADER_EMPLOYEE"/>
+      <viewAttribute id="JO_DIRECTOR_NAME"/>
+      <viewAttribute id="CUSTOM05"/>
+      <viewAttribute id="REPORT_DEPSECTY_PHONE"/>
+      <viewAttribute id="REPORT_DIVISION_DESC_TW"/>
+      <viewAttribute id="APPLIED"/>
+      <viewAttribute id="REPORT_FUNCTION"/>
+      <viewAttribute id="CANDIDATE_ID"/>
+      <viewAttribute id="BUDDY_NAME"/>
+      <viewAttribute id="REPORT_DEPARTMENT1_DESC_TW"/>
+      <viewAttribute id="JO_DIRECTOR_EMPLOYEEID"/>
+      <viewAttribute id="EMPLYEEID"/>
+      <viewAttribute id="REPORT_DEPSECTY_NAME"/>
+      <viewAttribute id="REPORT_SECTION"/>
+      <viewAttribute id="CUSTOM04"/>
+      <viewAttribute id="REPORT_SECTION_DESC_TW"/>
+      <viewAttribute id="REPORT_SECTION_DESC_US"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_081"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Projection_1">
+  <attributes>
+    <attribute id="CANDIDATE_ID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CANDIDATE_ID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CANDIDATE_ID"/>
+    </attribute>
+    <attribute id="NEW_IDENTITY" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NEW_IDENTITY"/>
+      <keyMapping columnObjectName="Projection_1" columnName="NEW_IDENTITY"/>
+    </attribute>
+    <attribute id="EXPC_RETURN_TIME" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EXPC_RETURN_TIME"/>
+      <keyMapping columnObjectName="Projection_1" columnName="EXPC_RETURN_TIME"/>
+    </attribute>
+    <attribute id="CANDIDATE_NAME" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CANDIDATE_NAME"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CANDIDATE_NAME"/>
+    </attribute>
+    <attribute id="EXPC_REPORT_DATE" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EXPC_REPORT_DATE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="EXPC_REPORT_DATE"/>
+    </attribute>
+    <attribute id="ACT_REPORT_DATE" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ACT_REPORT_DATE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="ACT_REPORT_DATE"/>
+    </attribute>
+    <attribute id="EMPLYEEID" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EMPLYEEID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="EMPLYEEID"/>
+    </attribute>
+    <attribute id="CUSTOM05" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CUSTOM05"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUSTOM05"/>
+    </attribute>
+    <attribute id="CUSTOM02" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CUSTOM02"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUSTOM02"/>
+    </attribute>
+    <attribute id="CUSTOM03" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CUSTOM03"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUSTOM03"/>
+    </attribute>
+    <attribute id="CUSTOM04" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CUSTOM04"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUSTOM04"/>
+    </attribute>
+    <attribute id="TRAINING_ADDRESS" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TRAINING_ADDRESS"/>
+      <keyMapping columnObjectName="Projection_1" columnName="TRAINING_ADDRESS"/>
+    </attribute>
+    <attribute id="OFFICE_ADDRESS" order="13" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="OFFICE_ADDRESS"/>
+      <keyMapping columnObjectName="Projection_1" columnName="OFFICE_ADDRESS"/>
+    </attribute>
+    <attribute id="PASSPORT_NATIONALITY" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PASSPORT_NATIONALITY"/>
+      <keyMapping columnObjectName="Projection_1" columnName="PASSPORT_NATIONALITY"/>
+    </attribute>
+    <attribute id="APPLIED" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="APPLIED"/>
+      <keyMapping columnObjectName="Projection_1" columnName="APPLIED"/>
+    </attribute>
+    <attribute id="PRE_LEAVE_DATE" order="16" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRE_LEAVE_DATE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="PRE_LEAVE_DATE"/>
+    </attribute>
+    <attribute id="PRE_EMPLOYEEID" order="17" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRE_EMPLOYEEID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="PRE_EMPLOYEEID"/>
+    </attribute>
+    <attribute id="LAST_NEWTRAIN_CPNT_ID" order="18" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LAST_NEWTRAIN_CPNT_ID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="LAST_NEWTRAIN_CPNT_ID"/>
+    </attribute>
+    <attribute id="LAST_NEWTRAIN_CPNT_NAME" order="19" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LAST_NEWTRAIN_CPNT_NAME"/>
+      <keyMapping columnObjectName="Projection_1" columnName="LAST_NEWTRAIN_CPNT_NAME"/>
+    </attribute>
+    <attribute id="LAST_NEWTRAIN_STATUS" order="20" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LAST_NEWTRAIN_STATUS"/>
+      <keyMapping columnObjectName="Projection_1" columnName="LAST_NEWTRAIN_STATUS"/>
+    </attribute>
+    <attribute id="JO_DEPARTMENT" order="21" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="JO_DEPARTMENT"/>
+      <keyMapping columnObjectName="Projection_1" columnName="JO_DEPARTMENT"/>
+    </attribute>
+    <attribute id="JO_DEPARTMENT_DESC_TW" order="22" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="JO_DEPARTMENT_DESC_TW"/>
+      <keyMapping columnObjectName="Projection_1" columnName="JO_DEPARTMENT_DESC_TW"/>
+    </attribute>
+    <attribute id="JO_DEPARTMENT_DESC_US" order="23" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="JO_DEPARTMENT_DESC_US"/>
+      <keyMapping columnObjectName="Projection_1" columnName="JO_DEPARTMENT_DESC_US"/>
+    </attribute>
+    <attribute id="JO_DIRECTOR_EMPLOYEEID" order="24" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="JO_DIRECTOR_EMPLOYEEID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="JO_DIRECTOR_EMPLOYEEID"/>
+    </attribute>
+    <attribute id="JO_DIRECTOR_NAME" order="25" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="JO_DIRECTOR_NAME"/>
+      <keyMapping columnObjectName="Projection_1" columnName="JO_DIRECTOR_NAME"/>
+    </attribute>
+    <attribute id="REPORT_EXTERNALCODE" order="26" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_EXTERNALCODE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_EXTERNALCODE"/>
+    </attribute>
+    <attribute id="REPORT_EXTERNALCODE_DESC_US" order="27" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_EXTERNALCODE_DESC_US"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_EXTERNALCODE_DESC_US"/>
+    </attribute>
+    <attribute id="REPORT_EXTERNALCODE_DESC_TW" order="28" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_EXTERNALCODE_DESC_TW"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_EXTERNALCODE_DESC_TW"/>
+    </attribute>
+    <attribute id="REPORT_AREA" order="29" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_AREA"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_AREA"/>
+    </attribute>
+    <attribute id="REPORT_AREA_DESC_US" order="30" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_AREA_DESC_US"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_AREA_DESC_US"/>
+    </attribute>
+    <attribute id="REPORT_AREA_DESC_TW" order="31" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_AREA_DESC_TW"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_AREA_DESC_TW"/>
+    </attribute>
+    <attribute id="REPORT_FUNCTION" order="32" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_FUNCTION"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_FUNCTION"/>
+    </attribute>
+    <attribute id="REPORT_FUNCTION_DESC_US" order="33" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_FUNCTION_DESC_US"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_FUNCTION_DESC_US"/>
+    </attribute>
+    <attribute id="REPORT_FUNCTION_DESC_TW" order="34" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_FUNCTION_DESC_TW"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_FUNCTION_DESC_TW"/>
+    </attribute>
+    <attribute id="REPORT_FUNCTION1" order="35" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_FUNCTION1"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_FUNCTION1"/>
+    </attribute>
+    <attribute id="REPORT_FUNCTION1_DESC_US" order="36" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_FUNCTION1_DESC_US"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_FUNCTION1_DESC_US"/>
+    </attribute>
+    <attribute id="REPORT_FUNCTION1_DESC_TW" order="37" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_FUNCTION1_DESC_TW"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_FUNCTION1_DESC_TW"/>
+    </attribute>
+    <attribute id="REPORT_DIVISION" order="38" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DIVISION"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DIVISION"/>
+    </attribute>
+    <attribute id="REPORT_DIVISION_DESC_US" order="39" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DIVISION_DESC_US"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DIVISION_DESC_US"/>
+    </attribute>
+    <attribute id="REPORT_DIVISION_DESC_TW" order="40" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DIVISION_DESC_TW"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DIVISION_DESC_TW"/>
+    </attribute>
+    <attribute id="REPORT_DIVISION1" order="41" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DIVISION1"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DIVISION1"/>
+    </attribute>
+    <attribute id="REPORT_DIVISION1_DESC_US" order="42" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DIVISION1_DESC_US"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DIVISION1_DESC_US"/>
+    </attribute>
+    <attribute id="REPORT_DIVISION1_DESC_TW" order="43" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DIVISION1_DESC_TW"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DIVISION1_DESC_TW"/>
+    </attribute>
+    <attribute id="REPORT_DEPARTMENT" order="44" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPARTMENT"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DEPARTMENT"/>
+    </attribute>
+    <attribute id="REPORT_DEPARTMENT_DESC_US" order="45" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPARTMENT_DESC_US"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DEPARTMENT_DESC_US"/>
+    </attribute>
+    <attribute id="REPORT_DEPARTMENT_DESC_TW" order="46" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPARTMENT_DESC_TW"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DEPARTMENT_DESC_TW"/>
+    </attribute>
+    <attribute id="REPORT_DEPARTMENT1" order="47" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPARTMENT1"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DEPARTMENT1"/>
+    </attribute>
+    <attribute id="REPORT_DEPARTMENT1_DESC_US" order="48" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPARTMENT1_DESC_US"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DEPARTMENT1_DESC_US"/>
+    </attribute>
+    <attribute id="REPORT_DEPARTMENT1_DESC_TW" order="49" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPARTMENT1_DESC_TW"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DEPARTMENT1_DESC_TW"/>
+    </attribute>
+    <attribute id="REPORT_SECTION" order="50" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_SECTION"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_SECTION"/>
+    </attribute>
+    <attribute id="REPORT_SECTION_DESC_US" order="51" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_SECTION_DESC_US"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_SECTION_DESC_US"/>
+    </attribute>
+    <attribute id="REPORT_SECTION_DESC_TW" order="52" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_SECTION_DESC_TW"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_SECTION_DESC_TW"/>
+    </attribute>
+    <attribute id="REPORT_DEPLEADER_EMPLOYEE" order="53" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPLEADER_EMPLOYEE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DEPLEADER_EMPLOYEE"/>
+    </attribute>
+    <attribute id="REPORT_DEPLEADER_NAME" order="54" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPLEADER_NAME"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DEPLEADER_NAME"/>
+    </attribute>
+    <attribute id="REPORT_DEPLEADER_EMAIL" order="55" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPLEADER_EMAIL"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DEPLEADER_EMAIL"/>
+    </attribute>
+    <attribute id="REPORT_DEPLEADER_PHONE" order="56" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPLEADER_PHONE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DEPLEADER_PHONE"/>
+    </attribute>
+    <attribute id="REPORT_DEPSECTY_EMPLOYEEID" order="57" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPSECTY_EMPLOYEEID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DEPSECTY_EMPLOYEEID"/>
+    </attribute>
+    <attribute id="REPORT_DEPSECTY_NAME" order="58" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPSECTY_NAME"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DEPSECTY_NAME"/>
+    </attribute>
+  
+    <attribute id="REPORT_DEPSECTY_EMAIL" order="59" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPSECTY_EMAIL"/>
+  
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DEPSECTY_EMAIL"/>
+  
+    </attribute>
+    <attribute id="REPORT_DEPSECTY_PHONE" order="60" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPSECTY_PHONE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REPORT_DEPSECTY_PHONE"/>
+    </attribute>
+    <attribute id="USERSSYSID" order="61" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="USERSSYSID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="USERSSYSID"/>
+    </attribute>
+    <attribute id="RECRUITER_NAME" order="62" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="RECRUITER_NAME"/>
+      <keyMapping columnObjectName="Projection_1" columnName="RECRUITER_NAME"/>
+    </attribute>
+    <attribute id="RECRUITER_PHONE" order="63" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="RECRUITER_PHONE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="RECRUITER_PHONE"/>
+    </attribute>
+    <attribute id="BUDDY_ID" order="64" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="BUDDY_ID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="BUDDY_ID"/>
+    </attribute>
+    <attribute id="BUDDY_NAME" order="65" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="BUDDY_NAME"/>
+      <keyMapping columnObjectName="Projection_1" columnName="BUDDY_NAME"/>
+    </attribute>
+    <attribute id="BUDDY_PHONE" order="66" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="BUDDY_PHONE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="BUDDY_PHONE"/>
+    </attribute></attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures>
+    <measure id="CC_Number" order="67" aggregationType="sum" measureType="simple" datatype="INTEGER" expressionLanguage="SQL">
+      <descriptions defaultDescription="Number"/>
+      <formula>1</formula>
+      
+      
+      </measure>
+  </calculatedMeasures>
+  <restrictedMeasures/>
+  <localDimensions/>
+
+  <sharedDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="92" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

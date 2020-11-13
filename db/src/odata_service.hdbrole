@@ -1,0 +1,11 @@
+{
+	"role": {
+		"name": "ZTSMC_VIEWMODEL.db::odata_service",
+		"schema_privileges": [{
+			"privileges": [
+				"SELECT",
+				"EXECUTE"
+			]
+		}]
+	}
+}

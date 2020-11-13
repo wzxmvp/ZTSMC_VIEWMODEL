@@ -1,0 +1,149 @@
+FUNCTION "ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_011"( LANGUAGE NVARCHAR(2) )
+       	  RETURNS TABLE(
+		     "USERID" NVARCHAR(32),
+		     "FIRSTNAME" NVARCHAR(128),
+		     "LASTNAME" NVARCHAR(128),
+		     "USERNAME" NVARCHAR(128),
+		     "ZFULLNAME" NVARCHAR(32),
+		     "DEPARTMENT_CODE" NVARCHAR(32),
+		     "ASSIGNEE" NVARCHAR(8),
+		     "EXT_SUPERVISOR" NVARCHAR(8),
+		     "INCLOUD_DAI" NVARCHAR(8),
+		     "CUSTOM04" NVARCHAR(128),
+		     "CUSTOM05" NVARCHAR(128),
+		     "JG_CATEGORY" NVARCHAR(90),
+		     "NMP1" NVARCHAR(32),
+		     "NMP2" NVARCHAR(32),
+		     "NMP3" NVARCHAR(32),
+		     "NMP4" NVARCHAR(32)
+       	  ) 
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+    /*****************************
+        Write your function logic
+    ****************************/
+return
+
+select 
+       a."USERID",
+       a."FIRSTNAME",
+       a."LASTNAME",
+       a."USERNAME",
+       a."ZFULLNAME",
+       a."DEPARTMENT_CODE",
+       
+       case
+       when a."CUSTOM01" = 'Dispatched Out' then 'V'
+       else 'N'
+       end as "ASSIGNEE",
+       
+       case 
+       when a."JOBLEVEL_CODE" in ('33M','34','35','36','37','38','39','40','41','42','43','44','45','50') then 'Y'
+       else 'N'
+       end as "EXT_SUPERVISOR",
+       
+       case
+       when a."TITLE" like '%代%' then 'Y'
+       else 'N'
+       end as "INCLOUD_DAI",
+       
+       a."CUSTOM04",
+       a."CUSTOM05",
+       a."JG_CATEGORY",
+       b."NMP1",
+       b."NMP2",
+       b."NMP3",
+       b."NMP4"
+              
+   FROM    "ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_USER"('US') AS a 
+   LEFT outer JOIN
+--從f表中根據完成日期和注冊狀態判定NMP課程字段的取值：
+--情況1：且RTYP ID=01，若注册状态为空，则赋值“ ”。
+--情況2：若注册状态为ENROLL，且没有完成日期，则赋值Enrolled。
+--情況3：若完训状态是0101，0106，0107，则显示完训日期。
+--情況4: 若Group=T/P，且RTYP ID=02，注冊狀態爲空 or 完成狀態！= 0101，0106，0107，则赋值 ”-“
+--情況5: 若注册状态为PENDING，完成狀態為空，则赋值Pending
+--情況6: 若注册状态为WAITLIST，完成狀態為空，则赋值Waitlist
+
+        ( select 
+          f."STUD_ID",
+          max( case 
+               when f.CPNT_ID = 'MG1256' and f."RTYP_ID" = '01' and f."ENRL_STAT_ID" = '' then ''
+	           when f.CPNT_ID = 'MG1256' and f."ENRL_STAT_ID" = 'ENROLL' and f."CMPL_STAT_ID" = '' then 'Enrolled'
+	           when f.CPNT_ID = 'MG1256' and f."CMPL_STAT_ID" in ('0101','0106','0107') then TO_CHAR(f.COMPL_DTE)
+	           when f.CPNT_ID = 'MG1256' and f."ENRL_STAT_ID" = 'PENDING' and f."CMPL_STAT_ID" = '' then 'Pending' 
+	           when f.CPNT_ID = 'MG1256' and f."ENRL_STAT_ID" = 'WAITLIST' and f."CMPL_STAT_ID" = '' then 'Waitlist'
+	           else ''
+           end)  as "NMP1",
+           max(case
+               when f.CPNT_ID = 'MG1393' and f."RTYP_ID" = '01' and f."ENRL_STAT_ID" = '' then ''
+               when f.CPNT_ID = 'MG1393' and f."ENRL_STAT_ID" = 'ENROLL' and f."CMPL_STAT_ID" = '' then 'Enrolled'
+	           when f.CPNT_ID = 'MG1393' and f."CMPL_STAT_ID" in ('0101','0106','0107') then TO_CHAR(f.COMPL_DTE) 
+	           when f.CPNT_ID = 'MG1393' and f."GROUP" = 'T/P' and f."RTYP_ID" = '02' and f."ENRL_STAT_ID" = '' and f."CMPL_STAT_ID" not in ('0101','0106','0107') then '-'
+	           when f.CPNT_ID = 'MG1393' and f."ENRL_STAT_ID" = 'PENDING' and f."CMPL_STAT_ID" = '' then 'Pending' 
+	           when f.CPNT_ID = 'MG1393' and f."ENRL_STAT_ID" = 'WAITLIST' and f."CMPL_STAT_ID" = '' then 'Waitlist'
+	           else '' 
+           end) as "NMP2",
+           max(case
+               when f.CPNT_ID = 'MG1394' and f."RTYP_ID" = '01' and f."ENRL_STAT_ID" = '' then ''
+               when f.CPNT_ID = 'MG1394' and f."ENRL_STAT_ID" = 'ENROLL' and f."CMPL_STAT_ID" = '' then 'Enrolled'
+	           when f.CPNT_ID = 'MG1394' and f."CMPL_STAT_ID" in ('0101','0106','0107') then TO_CHAR(f.COMPL_DTE) 
+	           when f.CPNT_ID = 'MG1394' and f."GROUP" = 'T/P' and f."RTYP_ID" = '02' and ( f."ENRL_STAT_ID" = '' or f."CMPL_STAT_ID" not in ('0101','0106','0107') ) then '-'
+	           when f.CPNT_ID = 'MG1394' and f."ENRL_STAT_ID" = 'PENDING' and f."CMPL_STAT_ID" = '' then 'Pending' 
+	           when f.CPNT_ID = 'MG1394' and f."ENRL_STAT_ID" = 'WAITLIST' and f."CMPL_STAT_ID" = '' then 'Waitlist'
+	           else '' 
+           end) as "NMP3",
+           max(case
+               when f.CPNT_ID = 'MG1275' and f."RTYP_ID" = '01' and f."ENRL_STAT_ID" = '' then ''
+               when f.CPNT_ID = 'MG1275' and f."ENRL_STAT_ID" = 'ENROLL' and f."CMPL_STAT_ID" = '' then 'Enrolled'
+	           when f.CPNT_ID = 'MG1275' and f."CMPL_STAT_ID" in ('0101','0106','0107') then TO_CHAR(f.COMPL_DTE) 
+	           when f.CPNT_ID = 'MG1275' and f."GROUP" = 'M' and f."RTYP_ID" = '02' and ( f."ENRL_STAT_ID" = '' or f."CMPL_STAT_ID" not in ('0101','0106','0107') ) then '-'
+	           when f.CPNT_ID = 'MG1275' and f."ENRL_STAT_ID" = 'PENDING' and f."CMPL_STAT_ID" = '' then 'Pending' 
+	           when f.CPNT_ID = 'MG1275' and f."ENRL_STAT_ID" = 'WAITLIST' and f."CMPL_STAT_ID" = '' then 'Waitlist'
+	           else '' 
+           end) as "NMP4"
+        from 
+--從d表中查詢最新一條記錄的的完成日期、注冊狀態等信息。        
+            ( select 
+            d."STUD_ID",
+            d."CPNT_ID",
+            d."CPNT_TITLE_TW",
+            d."ASSGN_DTE",
+            e."COMPL_DTE",
+            e."ENRL_STAT_ID",
+            e."CMPL_STAT_ID",
+            e."RTYP_ID",
+            g."CUSTOM05" as "GROUP"
+                from 
+--根據ASSGN_DTE獲取每個學員、每門課程記錄最新的一條記錄。               
+                  ( select 
+                   "STUD_ID",
+                   "CPNT_ID",
+                   "CPNT_TITLE_TW",
+                   max("ASSGN_DTE") as "ASSGN_DTE" 
+                   from "ZTSMC_VIEWMODEL.db::ZTAB_LMS_EMP_TRAIN"
+--                   where "STUD_ID"='000003' 
+                   GROUP BY "STUD_ID","CPNT_ID","CPNT_TITLE_TW" ) as d
+                   
+                     left outer join 
+                        "ZTSMC_VIEWMODEL.db::ZTAB_LMS_EMP_TRAIN" as e
+                     on d."STUD_ID" = e."STUD_ID"
+			         and d."CPNT_TITLE_TW" = e."CPNT_TITLE_TW"
+			         and d."ASSGN_DTE" = e."ASSGN_DTE"
+			         
+			         left outer join
+			         "ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_USER"('US') as g
+			         on d."STUD_ID" = g."USERID"
+			         
+            )  as f GROUP BY f."STUD_ID") as b
+            
+--       "ZTSMC_VIEWMODEL.db::ZTAB_LMS_EMP_TRAIN"  GROUP BY "STUD_ID") as b       
+       on ( a."USERID" = b."STUD_ID" )
+       
+	   where a."USERID" in (
+	 	 select "STUD_ID" 
+	 	 from "ZTSMC_VIEWMODEL.db::ZTAB_LMS_EMP_TRAIN" 
+	 	 where "CPNT_ID" in ('MG1256','MG1393','MG1394','MG1275')
+	 );
+ END;

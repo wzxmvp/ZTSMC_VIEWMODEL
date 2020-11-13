@@ -1,0 +1,629 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZCV_LMS_131" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="ZCV_LMS_131"/>
+<localVariables>
+  <variable id="LANGUAGE" parameter="true">
+    <descriptions defaultDescription="Language"/>
+    <variableProperties datatype="NVARCHAR" length="2" mandatory="false" defaultValue="TW">
+      <valueDomain type="StaticList">
+        <listEntry id="TW">
+          <descriptions defaultDescription="TW"/>
+        </listEntry>
+        <listEntry id="CN">
+          <descriptions defaultDescription="CN"/>
+        </listEntry>
+        <listEntry id="US">
+          <descriptions defaultDescription="US"/>
+        </listEntry>
+        <listEntry id="DF">
+          <descriptions defaultDescription="DF"/>
+        </listEntry>
+      </valueDomain>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+
+  <variable id="VALID_DATE" parameter="true">
+    <descriptions defaultDescription="Org Valid Date"/>
+    <variableProperties datatype="DATE" mandatory="false" defaultValue="2020-10-11">
+      <valueDomain type="Date"/>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_131">
+    <targetVariable name="LANGUAGE" resourceUri="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_131"/>
+    <localVariable>LANGUAGE</localVariable>
+  </mapping>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_USER">
+    <targetVariable name="LANGUAGE" resourceUri="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_USER"/>
+    <localVariable>LANGUAGE</localVariable>
+  </mapping>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU">
+    <targetVariable name="LANGUAGE" resourceUri="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU"/>
+    <localVariable>LANGUAGE</localVariable>
+  </mapping>
+</variableMappings>
+<dataSources>
+  <DataSource id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_131" type="TABLE_FUNCTION">
+    <resourceUri>ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_131</resourceUri>
+  </DataSource>
+  <DataSource id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_USER" type="TABLE_FUNCTION">
+    <resourceUri>ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_USER</resourceUri>
+  </DataSource>
+  <DataSource id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU" type="TABLE_FUNCTION">
+    <resourceUri>ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="TOTAL_HRS"/>
+      <viewAttribute id="ASSGN_DTE"/>
+      <viewAttribute id="CPNT_SRC_ID"/>
+      <viewAttribute id="STUD_ID"/>
+      <viewAttribute id="HW_GRADE"/>
+      <viewAttribute id="ITEM_TITLE"/>
+      <viewAttribute id="DEL_MTH_ID"/>
+      <viewAttribute id="EXAM_GRADE"/>
+      <viewAttribute id="ITEM_ID"/>
+      <viewAttribute id="PROGRAM_SECTION_TITLE"/>
+      <viewAttribute id="SURVEY_STATUS_ID"/>
+      <viewAttribute id="TITLE"/>
+      <viewAttribute id="COMPL_DTE"/>
+      <viewAttribute id="ATTENDANCE_CON"/>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="CMPL_STAT_ID"/>
+      <viewAttribute id="ADD_USERNAME"/>
+      <viewAttribute id="HOME_PASS_CON"/>
+      <viewAttribute id="TYPE"/>
+      <viewAttribute id="CREDIT_HRS"/>
+      <viewAttribute id="REQ_DTE"/>
+      <viewAttribute id="EXAM_PASS"/>
+      <viewAttribute id="CPML_CONDITION"/>
+      <viewAttribute id="CMPL_SURVEY_RESULT"/>
+      <viewAttribute id="CMPL_HRS_RESULT"/>
+      <viewAttribute id="PASS_HW_RESULT"/>
+      <viewAttribute id="PASS_EXAM_RESULT"/>
+      <viewAttribute id="CPNT_SELECT_FLG"/>
+    
+      <viewAttribute id="DEL_MTH_DESC"/>
+      <viewAttribute id="MANAGER"/>
+      <viewAttribute id="MANAGER_NAME"/>
+      <viewAttribute id="CPNT_SRC_DESC"/>
+    
+      <viewAttribute id="CMPL_STAT_DESC"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_131"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="leftOuter">
+    <viewAttributes>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="TOTAL_HRS" aggregationType="sum"/>
+      <viewAttribute id="ASSGN_DTE"/>
+      <viewAttribute id="CPNT_SRC_ID"/>
+      <viewAttribute id="STUD_ID"/>
+      <viewAttribute id="HW_GRADE"/>
+      <viewAttribute id="ITEM_TITLE"/>
+      <viewAttribute id="DEL_MTH_ID"/>
+      <viewAttribute id="EXAM_GRADE"/>
+      <viewAttribute id="ITEM_ID"/>
+      <viewAttribute id="PROGRAM_SECTION_TITLE"/>
+      <viewAttribute id="SURVEY_STATUS_ID"/>
+      <viewAttribute id="TITLE"/>
+      <viewAttribute id="COMPL_DTE"/>
+      <viewAttribute id="ATTENDANCE_CON"/>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="CMPL_STAT_ID"/>
+      <viewAttribute id="ADD_USERNAME"/>
+      <viewAttribute id="HOME_PASS_CON"/>
+      <viewAttribute id="TYPE"/>
+      <viewAttribute id="CREDIT_HRS" aggregationType="sum"/>
+      <viewAttribute id="REQ_DTE"/>
+      <viewAttribute id="EXAM_PASS"/>
+      <viewAttribute id="CPML_CONDITION"/>
+      <viewAttribute id="CMPL_SURVEY_RESULT"/>
+      <viewAttribute id="CMPL_HRS_RESULT"/>
+      <viewAttribute id="PASS_HW_RESULT"/>
+      <viewAttribute id="PASS_EXAM_RESULT"/>
+      <viewAttribute id="CPNT_SELECT_FLG"/>
+    
+      <viewAttribute id="MANAGER_NAME"/>
+      <viewAttribute id="MANAGER"/>
+    
+      <viewAttribute id="ZFULLNAME"/>
+    
+      <viewAttribute id="DEL_MTH_DESC"/>
+      <viewAttribute id="CPNT_SRC_DESC"/>
+    
+      <viewAttribute id="CMPL_STAT_DESC"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOTAL_HRS" source="TOTAL_HRS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ASSGN_DTE" source="ASSGN_DTE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CPNT_SRC_ID" source="CPNT_SRC_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STUD_ID" source="STUD_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HW_GRADE" source="HW_GRADE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ITEM_TITLE" source="ITEM_TITLE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEL_MTH_ID" source="DEL_MTH_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EXAM_GRADE" source="EXAM_GRADE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ITEM_ID" source="ITEM_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PROGRAM_SECTION_TITLE" source="PROGRAM_SECTION_TITLE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SURVEY_STATUS_ID" source="SURVEY_STATUS_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TITLE" source="TITLE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMPL_DTE" source="COMPL_DTE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ATTENDANCE_CON" source="ATTENDANCE_CON"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CMPL_STAT_ID" source="CMPL_STAT_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ADD_USERNAME" source="ADD_USERNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HOME_PASS_CON" source="HOME_PASS_CON"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TYPE" source="TYPE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CREDIT_HRS" source="CREDIT_HRS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REQ_DTE" source="REQ_DTE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EXAM_PASS" source="EXAM_PASS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CPML_CONDITION" source="CPML_CONDITION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CMPL_SURVEY_RESULT" source="CMPL_SURVEY_RESULT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CMPL_HRS_RESULT" source="CMPL_HRS_RESULT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PASS_HW_RESULT" source="PASS_HW_RESULT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PASS_EXAM_RESULT" source="PASS_EXAM_RESULT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CPNT_SELECT_FLG" source="CPNT_SELECT_FLG"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEL_MTH_DESC" source="DEL_MTH_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CPNT_SRC_DESC" source="CPNT_SRC_DESC"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="CMPL_STAT_DESC" source="CMPL_STAT_DESC"/>
+    </input>
+  
+    <input node="Projection_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="MANAGER_NAME" source="MANAGER_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MANAGER" source="MANAGER"/>
+  
+      <mapping xsi:type="Calculation:AttributeMapping" target="ZFULLNAME" source="ZFULLNAME"/>
+  
+      <mapping xsi:type="Calculation:AttributeMapping" target="STUD_ID" source="USERID"/>
+  
+    </input>
+    <joinAttribute name="STUD_ID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
+    <viewAttributes>
+      <viewAttribute id="MANAGER_NAME"/>
+    
+      <viewAttribute id="MANAGER"/>
+    
+      <viewAttribute id="ZFULLNAME"/>
+    
+      <viewAttribute id="USERID"/>
+      <viewAttribute id="DEPARTMENT_CODE"/></viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_USER"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2">
+    <viewAttributes>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="TOTAL_HRS" aggregationType="sum"/>
+      <viewAttribute id="ASSGN_DTE"/>
+      <viewAttribute id="CPNT_SRC_ID"/>
+      <viewAttribute id="STUD_ID"/>
+      <viewAttribute id="HW_GRADE"/>
+      <viewAttribute id="ITEM_TITLE"/>
+      <viewAttribute id="DEL_MTH_ID"/>
+      <viewAttribute id="EXAM_GRADE"/>
+      <viewAttribute id="ITEM_ID"/>
+      <viewAttribute id="PROGRAM_SECTION_TITLE"/>
+      <viewAttribute id="SURVEY_STATUS_ID"/>
+      <viewAttribute id="TITLE"/>
+      <viewAttribute id="COMPL_DTE"/>
+      <viewAttribute id="ATTENDANCE_CON"/>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="CMPL_STAT_ID"/>
+      <viewAttribute id="ADD_USERNAME"/>
+      <viewAttribute id="HOME_PASS_CON"/>
+      <viewAttribute id="TYPE"/>
+      <viewAttribute id="CREDIT_HRS" aggregationType="sum"/>
+      <viewAttribute id="REQ_DTE"/>
+      <viewAttribute id="EXAM_PASS"/>
+      <viewAttribute id="CPML_CONDITION"/>
+      <viewAttribute id="CMPL_SURVEY_RESULT"/>
+      <viewAttribute id="CMPL_HRS_RESULT"/>
+      <viewAttribute id="PASS_HW_RESULT"/>
+      <viewAttribute id="PASS_EXAM_RESULT"/>
+      <viewAttribute id="CPNT_SELECT_FLG"/>
+      <viewAttribute id="MANAGER_NAME"/>
+      <viewAttribute id="MANAGER"/>
+    
+      <viewAttribute id="REPORT_AREA"/>
+      <viewAttribute id="REPORT_AREA_DESC"/>
+      <viewAttribute id="REPORT_FUNCTION"/>
+      <viewAttribute id="REPORT_FUNCTION_DESC"/>
+      <viewAttribute id="REPORT_FUNCTION1"/>
+      <viewAttribute id="REPORT_FUNCTION1_DESC"/>
+      <viewAttribute id="REPORT_DIVISION"/>
+      <viewAttribute id="REPORT_DIVISION_DESC"/>
+      <viewAttribute id="REPORT_DIVISION1"/>
+      <viewAttribute id="REPORT_DIVISION1_DESC"/>
+      <viewAttribute id="REPORT_DEPARTMENT"/>
+      <viewAttribute id="REPORT_DEPARTMENT_DESC"/>
+      <viewAttribute id="REPORT_DEPARTMENT1"/>
+      <viewAttribute id="REPORT_DEPARTMENT1_DESC"/>
+      <viewAttribute id="REPORT_SECTION"/>
+      <viewAttribute id="REPORT_SECTION_DESC"/>
+    
+      <viewAttribute id="ZFULLNAME"/>
+    
+      <viewAttribute id="DEL_MTH_DESC"/>
+      <viewAttribute id="CPNT_SRC_DESC"/>
+    
+      <viewAttribute id="CMPL_STAT_DESC"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Join_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOTAL_HRS" source="TOTAL_HRS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ASSGN_DTE" source="ASSGN_DTE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CPNT_SRC_ID" source="CPNT_SRC_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STUD_ID" source="STUD_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HW_GRADE" source="HW_GRADE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ITEM_TITLE" source="ITEM_TITLE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEL_MTH_ID" source="DEL_MTH_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EXAM_GRADE" source="EXAM_GRADE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ITEM_ID" source="ITEM_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PROGRAM_SECTION_TITLE" source="PROGRAM_SECTION_TITLE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SURVEY_STATUS_ID" source="SURVEY_STATUS_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TITLE" source="TITLE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMPL_DTE" source="COMPL_DTE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ATTENDANCE_CON" source="ATTENDANCE_CON"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CMPL_STAT_ID" source="CMPL_STAT_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ADD_USERNAME" source="ADD_USERNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HOME_PASS_CON" source="HOME_PASS_CON"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TYPE" source="TYPE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CREDIT_HRS" source="CREDIT_HRS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REQ_DTE" source="REQ_DTE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EXAM_PASS" source="EXAM_PASS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CPML_CONDITION" source="CPML_CONDITION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CMPL_SURVEY_RESULT" source="CMPL_SURVEY_RESULT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CMPL_HRS_RESULT" source="CMPL_HRS_RESULT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PASS_HW_RESULT" source="PASS_HW_RESULT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PASS_EXAM_RESULT" source="PASS_EXAM_RESULT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CPNT_SELECT_FLG" source="CPNT_SELECT_FLG"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MANAGER_NAME" source="MANAGER_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MANAGER" source="MANAGER"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="ZFULLNAME" source="ZFULLNAME"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEL_MTH_DESC" source="DEL_MTH_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CPNT_SRC_DESC" source="CPNT_SRC_DESC"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="CMPL_STAT_DESC" source="CMPL_STAT_DESC"/>
+    </input>
+  
+    <input node="Projection_3">
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_AREA" source="REPORT_AREA"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_AREA_DESC" source="REPORT_AREA_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_FUNCTION" source="REPORT_FUNCTION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_FUNCTION_DESC" source="REPORT_FUNCTION_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_FUNCTION1" source="REPORT_FUNCTION1"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_FUNCTION1_DESC" source="REPORT_FUNCTION1_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_DIVISION" source="REPORT_DIVISION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_DIVISION_DESC" source="REPORT_DIVISION_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_DIVISION1" source="REPORT_DIVISION1"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_DIVISION1_DESC" source="REPORT_DIVISION1_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_DEPARTMENT" source="REPORT_DEPARTMENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_DEPARTMENT_DESC" source="REPORT_DEPARTMENT_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_DEPARTMENT1" source="REPORT_DEPARTMENT1"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_DEPARTMENT1_DESC" source="REPORT_DEPARTMENT1_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_SECTION" source="REPORT_SECTION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_SECTION_DESC" source="REPORT_SECTION_DESC"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_3" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="REPORT_AREA"/>
+      <viewAttribute id="REPORT_AREA_DESC"/>
+      <viewAttribute id="REPORT_FUNCTION"/>
+      <viewAttribute id="REPORT_FUNCTION_DESC"/>
+      <viewAttribute id="REPORT_FUNCTION1"/>
+      <viewAttribute id="REPORT_FUNCTION1_DESC"/>
+      <viewAttribute id="REPORT_DIVISION"/>
+      <viewAttribute id="REPORT_DIVISION_DESC"/>
+      <viewAttribute id="REPORT_DIVISION1"/>
+      <viewAttribute id="REPORT_DIVISION1_DESC"/>
+      <viewAttribute id="REPORT_DEPARTMENT"/>
+      <viewAttribute id="REPORT_DEPARTMENT_DESC"/>
+      <viewAttribute id="REPORT_DEPARTMENT1"/>
+      <viewAttribute id="REPORT_DEPARTMENT1_DESC"/>
+      <viewAttribute id="REPORT_SECTION"/>
+      <viewAttribute id="REPORT_SECTION_DESC"/>
+      <viewAttribute id="EFFECTIVESTARTDATE"/>
+      <viewAttribute id="EFFECTIVEENDDATE"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU"/>
+    <filter>&quot;EFFECTIVESTARTDATE&quot; &lt;= '$$VALID_DATE$$' and '$$VALID_DATE$$' &lt;= &quot;EFFECTIVEENDDATE&quot;</filter>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_2">
+  <attributes>
+    <attribute id="STUD_ID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="學員ID"/>
+      <keyMapping columnObjectName="Join_2" columnName="STUD_ID"/>
+    </attribute>
+    <attribute id="NAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="學員姓名"/>
+      <keyMapping columnObjectName="Join_2" columnName="NAME"/>
+    </attribute>
+    <attribute id="TYPE" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="類型"/>
+      <keyMapping columnObjectName="Join_2" columnName="TYPE"/>
+    </attribute>
+    <attribute id="ID" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PC編碼"/>
+      <keyMapping columnObjectName="Join_2" columnName="ID"/>
+    </attribute>
+    <attribute id="TITLE" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PC名稱"/>
+      <keyMapping columnObjectName="Join_2" columnName="TITLE"/>
+    </attribute>
+    <attribute id="ITEM_ID" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="課程編碼"/>
+      <keyMapping columnObjectName="Join_2" columnName="ITEM_ID"/>
+    </attribute>
+    <attribute id="ITEM_TITLE" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="課程名稱"/>
+      <keyMapping columnObjectName="Join_2" columnName="ITEM_TITLE"/>
+    </attribute>
+    <attribute id="DEL_MTH_ID" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DEL_MTH_ID"/>
+      <keyMapping columnObjectName="Join_2" columnName="DEL_MTH_ID"/>
+    </attribute>
+    <attribute id="DEL_MTH_DESC" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="授課方式"/>
+      <keyMapping columnObjectName="Join_2" columnName="DEL_MTH_DESC"/>
+    </attribute>
+    <attribute id="CPNT_SRC_ID" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CPNT_SRC_ID"/>
+      <keyMapping columnObjectName="Join_2" columnName="CPNT_SRC_ID"/>
+    </attribute>
+    <attribute id="CPNT_SRC_DESC" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="課程來源"/>
+      <keyMapping columnObjectName="Join_2" columnName="CPNT_SRC_DESC"/>
+    </attribute>
+    <attribute id="ASSGN_DTE" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Assignment Date"/>
+      <keyMapping columnObjectName="Join_2" columnName="ASSGN_DTE"/>
+    </attribute>
+    <attribute id="REQ_DTE" order="13" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Est. Completion Date"/>
+      <keyMapping columnObjectName="Join_2" columnName="REQ_DTE"/>
+    </attribute>
+    <attribute id="ADD_USERNAME" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ADD_USERNAME"/>
+      <keyMapping columnObjectName="Join_2" columnName="ADD_USERNAME"/>
+    </attribute>
+    <attribute id="COMPL_DTE" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Completion Date"/>
+      <keyMapping columnObjectName="Join_2" columnName="COMPL_DTE"/>
+    </attribute>
+    <attribute id="PASS_EXAM_RESULT" order="16" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="考試結果（Y/N）"/>
+      <keyMapping columnObjectName="Join_2" columnName="PASS_EXAM_RESULT"/>
+    </attribute>
+    <attribute id="PASS_HW_RESULT" order="17" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="作業結果（Y/N）"/>
+      <keyMapping columnObjectName="Join_2" columnName="PASS_HW_RESULT"/>
+    </attribute>
+    <attribute id="CMPL_HRS_RESULT" order="18" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="達完訓時數門檻（Y/N）"/>
+      <keyMapping columnObjectName="Join_2" columnName="CMPL_HRS_RESULT"/>
+    </attribute>
+    <attribute id="CMPL_SURVEY_RESULT" order="19" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="是否填寫滿意度問卷（Y/N）"/>
+      <keyMapping columnObjectName="Join_2" columnName="CMPL_SURVEY_RESULT"/>
+    </attribute>
+    <attribute id="CMPL_STAT_ID" order="20" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CMPL_STAT_ID"/>
+      <keyMapping columnObjectName="Join_2" columnName="CMPL_STAT_ID"/>
+    </attribute>
+    <attribute id="CMPL_STAT_DESC" order="21" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="完訓狀態"/>
+      <keyMapping columnObjectName="Join_2" columnName="CMPL_STAT_DESC"/>
+    </attribute>
+    <attribute id="MANAGER" order="24" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="直屬主管 ID "/>
+      <keyMapping columnObjectName="Join_2" columnName="MANAGER"/>
+    </attribute>
+    <attribute id="MANAGER_NAME" order="25" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="直屬主管 姓名"/>
+      <keyMapping columnObjectName="Join_2" columnName="MANAGER_NAME"/>
+    </attribute>
+    <attribute id="PROGRAM_SECTION_TITLE" order="26" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="步驟/段落"/>
+      <keyMapping columnObjectName="Join_2" columnName="PROGRAM_SECTION_TITLE"/>
+    </attribute>
+    <attribute id="SURVEY_STATUS_ID" hidden="true" order="27" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SURVEY_STATUS_ID"/>
+      <keyMapping columnObjectName="Join_2" columnName="SURVEY_STATUS_ID"/>
+    </attribute>
+    <attribute id="ATTENDANCE_CON" hidden="true" order="28" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ATTENDANCE_CON"/>
+      <keyMapping columnObjectName="Join_2" columnName="ATTENDANCE_CON"/>
+    </attribute>
+    <attribute id="HW_GRADE" hidden="true" order="29" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HW_GRADE"/>
+      <keyMapping columnObjectName="Join_2" columnName="HW_GRADE"/>
+    </attribute>
+    <attribute id="EXAM_GRADE" hidden="true" order="30" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EXAM_GRADE"/>
+      <keyMapping columnObjectName="Join_2" columnName="EXAM_GRADE"/>
+    </attribute>
+    <attribute id="HOME_PASS_CON" hidden="true" order="31" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HOME_PASS_CON"/>
+      <keyMapping columnObjectName="Join_2" columnName="HOME_PASS_CON"/>
+    </attribute>
+    <attribute id="EXAM_PASS" hidden="true" order="32" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EXAM_PASS"/>
+      <keyMapping columnObjectName="Join_2" columnName="EXAM_PASS"/>
+    </attribute>
+    <attribute id="CPML_CONDITION" order="33" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CPML_CONDITION"/>
+      <keyMapping columnObjectName="Join_2" columnName="CPML_CONDITION"/>
+    </attribute>
+    <attribute id="CPNT_SELECT_FLG" order="34" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CPNT_SELECT_FLG"/>
+      <keyMapping columnObjectName="Join_2" columnName="CPNT_SELECT_FLG"/>
+    </attribute>
+  
+    <attribute id="REPORT_AREA" order="35" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_AREA"/>
+  
+      <keyMapping columnObjectName="Join_2" columnName="REPORT_AREA"/>
+  
+    </attribute>
+    <attribute id="REPORT_AREA_DESC" order="36" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_AREA_DESC"/>
+      <keyMapping columnObjectName="Join_2" columnName="REPORT_AREA_DESC"/>
+    </attribute>
+  
+    <attribute id="ZFULLNAME" order="37" displayAttribute="false" attributeHierarchyActive="false" hidden="true">
+      <descriptions defaultDescription="ZFULLNAME"/>
+  
+      <keyMapping columnObjectName="Join_2" columnName="ZFULLNAME"/>
+  
+    </attribute>
+  
+    <attribute id="REPORT_FUNCTION" order="38" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_FUNCTION"/>
+  
+      <keyMapping columnObjectName="Join_2" columnName="REPORT_FUNCTION"/>
+  
+    </attribute>
+    <attribute id="REPORT_FUNCTION_DESC" order="39" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_FUNCTION_DESC"/>
+      <keyMapping columnObjectName="Join_2" columnName="REPORT_FUNCTION_DESC"/>
+    </attribute>
+    <attribute id="REPORT_FUNCTION1" order="40" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_FUNCTION1"/>
+      <keyMapping columnObjectName="Join_2" columnName="REPORT_FUNCTION1"/>
+    </attribute>
+    <attribute id="REPORT_FUNCTION1_DESC" order="41" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_FUNCTION1_DESC"/>
+      <keyMapping columnObjectName="Join_2" columnName="REPORT_FUNCTION1_DESC"/>
+    </attribute>
+    <attribute id="REPORT_DIVISION" order="42" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DIVISION"/>
+      <keyMapping columnObjectName="Join_2" columnName="REPORT_DIVISION"/>
+    </attribute>
+    <attribute id="REPORT_DIVISION_DESC" order="43" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DIVISION_DESC"/>
+      <keyMapping columnObjectName="Join_2" columnName="REPORT_DIVISION_DESC"/>
+    </attribute>
+    <attribute id="REPORT_DIVISION1" order="44" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DIVISION1"/>
+      <keyMapping columnObjectName="Join_2" columnName="REPORT_DIVISION1"/>
+    </attribute>
+    <attribute id="REPORT_DIVISION1_DESC" order="45" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DIVISION1_DESC"/>
+      <keyMapping columnObjectName="Join_2" columnName="REPORT_DIVISION1_DESC"/>
+    </attribute>
+    <attribute id="REPORT_DEPARTMENT" order="46" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPARTMENT"/>
+      <keyMapping columnObjectName="Join_2" columnName="REPORT_DEPARTMENT"/>
+    </attribute>
+    <attribute id="REPORT_DEPARTMENT_DESC" order="47" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPARTMENT_DESC"/>
+      <keyMapping columnObjectName="Join_2" columnName="REPORT_DEPARTMENT_DESC"/>
+    </attribute>
+    <attribute id="REPORT_DEPARTMENT1" order="48" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPARTMENT1"/>
+      <keyMapping columnObjectName="Join_2" columnName="REPORT_DEPARTMENT1"/>
+    </attribute>
+    <attribute id="REPORT_DEPARTMENT1_DESC" order="49" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPARTMENT1_DESC"/>
+      <keyMapping columnObjectName="Join_2" columnName="REPORT_DEPARTMENT1_DESC"/>
+    </attribute>
+    <attribute id="REPORT_SECTION" order="50" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_SECTION"/>
+      <keyMapping columnObjectName="Join_2" columnName="REPORT_SECTION"/>
+    </attribute>
+    <attribute id="REPORT_SECTION_DESC" order="51" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_SECTION_DESC"/>
+      <keyMapping columnObjectName="Join_2" columnName="REPORT_SECTION_DESC"/>
+    </attribute></attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="TOTAL_HRS" order="22" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Total Hour"/>
+      <measureMapping columnObjectName="Join_2" columnName="TOTAL_HRS"/>
+    </measure>
+    <measure id="CREDIT_HRS" order="23" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Credit Hour"/>
+      <measureMapping columnObjectName="Join_2" columnName="CREDIT_HRS"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+
+  <sharedDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="328" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="516"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="118" y="356"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  
+    <shape modelObjectName="Projection_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302" y="516"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="328" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Join_1" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Projection_3" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_3" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="395" y="356"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  
+    <shape modelObjectName="Join_2" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

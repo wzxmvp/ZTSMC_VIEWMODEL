@@ -1,0 +1,28 @@
+ID: ZTSMC_VIEWMODEL
+_schema-version: '2.1'
+version: 0.0.4
+modules:
+  - name: db
+    type: hdb
+    path: db
+    requires:                                               # db module needs:
+      - name: view_model-hdi                                     # ...where synonyms are created
+        properties:
+          TARGET_CONTAINER: '~{hdi-container-name}'         # defined at (d1)
+      - name: odata-schema                                  #...for executing grant statement
+
+
+resources:
+  - name: view_model-hdi
+    properties:
+      hdi-container-name: '${service-name}'                # (d1) get service into variable
+    type: com.sap.xs.hdi-container
+    
+  - name: odata-schema 
+    type: org.cloudfoundry.existing-service                # service created with xs cups
+    parameters:
+      service-name: odata-schema
+
+
+
+

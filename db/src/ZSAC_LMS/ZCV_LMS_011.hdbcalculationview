@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZCV_LMS_011" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="ZCV_LMS_011"/>
+<localVariables>
+  <variable id="VALID_DATE" parameter="true">
+    <descriptions defaultDescription="Org Valid Date"/>
+    <variableProperties datatype="DATE" mandatory="false" defaultValue="2020-10-07">
+      <valueDomain type="Date"/>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+  <variable id="LANGUAGE" parameter="true">
+    <descriptions defaultDescription="Language"/>
+    <variableProperties datatype="NVARCHAR" length="2" mandatory="false" defaultValue="">
+      <valueDomain type="StaticList">
+        <listEntry id="TW">
+          <descriptions defaultDescription="TW"/>
+        </listEntry>
+        <listEntry id="CN">
+          <descriptions defaultDescription="CN"/>
+        </listEntry>
+        <listEntry id="US">
+          <descriptions defaultDescription="US"/>
+        </listEntry>
+        <listEntry id="DF">
+          <descriptions defaultDescription="DF"/>
+        </listEntry>
+      </valueDomain>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU">
+    <targetVariable name="LANGUAGE" resourceUri="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU"/>
+    <localVariable>LANGUAGE</localVariable>
+  </mapping>
+</variableMappings>
+<dataSources>
+  <DataSource id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_011" type="TABLE_FUNCTION">
+    <resourceUri>ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_011</resourceUri>
+  </DataSource>
+  <DataSource id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU" type="TABLE_FUNCTION">
+    <resourceUri>ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="NMP4"/>
+      <viewAttribute id="ASSIGNEE"/>
+      <viewAttribute id="NMP3"/>
+      <viewAttribute id="DEPARTMENT_CODE"/>
+      <viewAttribute id="NMP2"/>
+      <viewAttribute id="USERNAME"/>
+      <viewAttribute id="CUSTOM05"/>
+      <viewAttribute id="NMP1"/>
+      <viewAttribute id="LASTNAME"/>
+      <viewAttribute id="CUSTOM04"/>
+      <viewAttribute id="FIRSTNAME"/>
+      <viewAttribute id="INCLOUD_DAI"/>
+      <viewAttribute id="USERID"/>
+      <viewAttribute id="EXT_SUPERVISOR"/>
+    
+      <viewAttribute id="ZFULLNAME"/>
+    
+      <viewAttribute id="JG_CATEGORY"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_011"/>
+  
+    <filter>&quot;CUSTOM05&quot; = 'T/P' or &quot;CUSTOM05&quot; = 'M'</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="leftOuter">
+    <viewAttributes>
+      <viewAttribute id="NMP4"/>
+      <viewAttribute id="ASSIGNEE"/>
+      <viewAttribute id="NMP3"/>
+      <viewAttribute id="DEPARTMENT_CODE"/>
+      <viewAttribute id="NMP2"/>
+      <viewAttribute id="USERNAME"/>
+      <viewAttribute id="CUSTOM05"/>
+      <viewAttribute id="NMP1"/>
+      <viewAttribute id="LASTNAME"/>
+      <viewAttribute id="CUSTOM04"/>
+      <viewAttribute id="FIRSTNAME"/>
+      <viewAttribute id="INCLOUD_DAI"/>
+      <viewAttribute id="USERID"/>
+      <viewAttribute id="EXT_SUPERVISOR"/>
+      <viewAttribute id="EXTERNALCODE"/>
+      <viewAttribute id="PARENTDEPARTMENT"/>
+      <viewAttribute id="EXTERNALCODE_DESC"/>
+    
+      <viewAttribute id="REPORT_AREA"/>
+      <viewAttribute id="REPORT_AREA_DESC"/>
+      <viewAttribute id="REPORT_FUNCTION"/>
+      <viewAttribute id="REPORT_FUNCTION_DESC"/>
+      <viewAttribute id="REPORT_FUNCTION1"/>
+      <viewAttribute id="REPORT_FUNCTION1_DESC"/>
+      <viewAttribute id="REPORT_DIVISION"/>
+      <viewAttribute id="REPORT_DIVISION_DESC"/>
+      <viewAttribute id="REPORT_DIVISION1"/>
+      <viewAttribute id="REPORT_DIVISION1_DESC"/>
+      <viewAttribute id="REPORT_DEPARTMENT"/>
+      <viewAttribute id="REPORT_DEPARTMENT_DESC"/>
+      <viewAttribute id="REPORT_DEPARTMENT1"/>
+      <viewAttribute id="REPORT_DEPARTMENT1_DESC"/>
+    
+      <viewAttribute id="ZFULLNAME"/>
+    
+      <viewAttribute id="JG_CATEGORY"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="NMP4" source="NMP4"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ASSIGNEE" source="ASSIGNEE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NMP3" source="NMP3"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENT_CODE" source="DEPARTMENT_CODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NMP2" source="NMP2"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="USERNAME" source="USERNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CUSTOM05" source="CUSTOM05"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NMP1" source="NMP1"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LASTNAME" source="LASTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CUSTOM04" source="CUSTOM04"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FIRSTNAME" source="FIRSTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="INCLOUD_DAI" source="INCLOUD_DAI"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="USERID" source="USERID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EXT_SUPERVISOR" source="EXT_SUPERVISOR"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="ZFULLNAME" source="ZFULLNAME"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="JG_CATEGORY" source="JG_CATEGORY"/>
+    </input>
+    <input node="Projection_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="EXTERNALCODE" source="EXTERNALCODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PARENTDEPARTMENT" source="PARENTDEPARTMENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EXTERNALCODE_DESC" source="EXTERNALCODE_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_AREA" source="REPORT_AREA"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_AREA_DESC" source="REPORT_AREA_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_FUNCTION" source="REPORT_FUNCTION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_FUNCTION_DESC" source="REPORT_FUNCTION_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_FUNCTION1" source="REPORT_FUNCTION1"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_FUNCTION1_DESC" source="REPORT_FUNCTION1_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_DIVISION" source="REPORT_DIVISION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_DIVISION_DESC" source="REPORT_DIVISION_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_DIVISION1" source="REPORT_DIVISION1"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_DIVISION1_DESC" source="REPORT_DIVISION1_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_DEPARTMENT" source="REPORT_DEPARTMENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_DEPARTMENT_DESC" source="REPORT_DEPARTMENT_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_DEPARTMENT1" source="REPORT_DEPARTMENT1"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_DEPARTMENT1_DESC" source="REPORT_DEPARTMENT1_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENT_CODE" source="EXTERNALCODE"/>
+    </input>
+    <joinAttribute name="DEPARTMENT_CODE"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="EXTERNALCODE"/>
+      <viewAttribute id="PARENTDEPARTMENT"/>
+      <viewAttribute id="EXTERNALCODE_DESC"/>
+    
+      <viewAttribute id="REPORT_AREA"/>
+      <viewAttribute id="REPORT_AREA_DESC"/>
+      <viewAttribute id="REPORT_FUNCTION"/>
+      <viewAttribute id="REPORT_FUNCTION_DESC"/>
+      <viewAttribute id="REPORT_FUNCTION1"/>
+      <viewAttribute id="REPORT_FUNCTION1_DESC"/>
+      <viewAttribute id="REPORT_DIVISION"/>
+      <viewAttribute id="REPORT_DIVISION_DESC"/>
+      <viewAttribute id="REPORT_DIVISION1"/>
+      <viewAttribute id="REPORT_DIVISION1_DESC"/>
+      <viewAttribute id="REPORT_DEPARTMENT"/>
+      <viewAttribute id="REPORT_DEPARTMENT_DESC"/>
+      <viewAttribute id="REPORT_DEPARTMENT1"/>
+      <viewAttribute id="REPORT_DEPARTMENT1_DESC"/>
+    
+      <viewAttribute id="EFFECTIVESTARTDATE"/>
+      <viewAttribute id="EFFECTIVEENDDATE"/></viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU"/>
+    <filter>&quot;EFFECTIVESTARTDATE&quot; &lt;= '$$VALID_DATE$$' and '$$VALID_DATE$$' &lt;= &quot;EFFECTIVEENDDATE&quot;</filter>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="NMP4" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NMP4"/>
+      <keyMapping columnObjectName="Join_1" columnName="NMP4"/>
+    </attribute>
+    <attribute id="ASSIGNEE" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ASSIGNEE"/>
+      <keyMapping columnObjectName="Join_1" columnName="ASSIGNEE"/>
+    </attribute>
+    <attribute id="NMP3" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NMP3"/>
+      <keyMapping columnObjectName="Join_1" columnName="NMP3"/>
+    </attribute>
+    <attribute id="DEPARTMENT_CODE" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DEPARTMENT_CODE"/>
+      <keyMapping columnObjectName="Join_1" columnName="DEPARTMENT_CODE"/>
+    </attribute>
+    <attribute id="NMP2" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NMP2"/>
+      <keyMapping columnObjectName="Join_1" columnName="NMP2"/>
+    </attribute>
+    <attribute id="USERNAME" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="USERNAME"/>
+      <keyMapping columnObjectName="Join_1" columnName="USERNAME"/>
+    </attribute>
+    <attribute id="ZFULLNAME" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ZFULLNAME"/>
+      <keyMapping columnObjectName="Join_1" columnName="ZFULLNAME"/>
+    </attribute>
+    <attribute id="CUSTOM05" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CUSTOM05"/>
+      <keyMapping columnObjectName="Join_1" columnName="CUSTOM05"/>
+    </attribute>
+    <attribute id="NMP1" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NMP1"/>
+      <keyMapping columnObjectName="Join_1" columnName="NMP1"/>
+    </attribute>
+    <attribute id="LASTNAME" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LASTNAME"/>
+      <keyMapping columnObjectName="Join_1" columnName="LASTNAME"/>
+    </attribute>
+    <attribute id="CUSTOM04" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CUSTOM04"/>
+      <keyMapping columnObjectName="Join_1" columnName="CUSTOM04"/>
+    </attribute>
+    <attribute id="FIRSTNAME" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FIRSTNAME"/>
+      <keyMapping columnObjectName="Join_1" columnName="FIRSTNAME"/>
+    </attribute>
+    <attribute id="INCLOUD_DAI" order="13" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="INCLOUD_DAI"/>
+      <keyMapping columnObjectName="Join_1" columnName="INCLOUD_DAI"/>
+    </attribute>
+    <attribute id="USERID" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="USERID"/>
+      <keyMapping columnObjectName="Join_1" columnName="USERID"/>
+    </attribute>
+    <attribute id="EXT_SUPERVISOR" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EXT_SUPERVISOR"/>
+      <keyMapping columnObjectName="Join_1" columnName="EXT_SUPERVISOR"/>
+    </attribute>
+    <attribute id="EXTERNALCODE" order="16" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EXTERNALCODE"/>
+      <keyMapping columnObjectName="Join_1" columnName="EXTERNALCODE"/>
+    </attribute>
+    <attribute id="PARENTDEPARTMENT" order="17" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PARENTDEPARTMENT"/>
+      <keyMapping columnObjectName="Join_1" columnName="PARENTDEPARTMENT"/>
+    </attribute>
+    <attribute id="EXTERNALCODE_DESC" order="18" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EXTERNALCODE_DESC"/>
+      <keyMapping columnObjectName="Join_1" columnName="EXTERNALCODE_DESC"/>
+    </attribute>
+  
+    <attribute id="REPORT_AREA" order="20" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_AREA"/>
+  
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_AREA"/>
+  
+    </attribute>
+    <attribute id="REPORT_AREA_DESC" order="21" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_AREA_DESC"/>
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_AREA_DESC"/>
+    </attribute>
+    <attribute id="REPORT_FUNCTION" order="22" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_FUNCTION"/>
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_FUNCTION"/>
+    </attribute>
+    <attribute id="REPORT_FUNCTION_DESC" order="23" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_FUNCTION_DESC"/>
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_FUNCTION_DESC"/>
+    </attribute>
+    <attribute id="REPORT_FUNCTION1" order="24" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_FUNCTION1"/>
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_FUNCTION1"/>
+    </attribute>
+    <attribute id="REPORT_FUNCTION1_DESC" order="25" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_FUNCTION1_DESC"/>
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_FUNCTION1_DESC"/>
+    </attribute>
+    <attribute id="REPORT_DIVISION" order="26" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DIVISION"/>
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_DIVISION"/>
+    </attribute>
+    <attribute id="REPORT_DIVISION_DESC" order="27" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DIVISION_DESC"/>
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_DIVISION_DESC"/>
+    </attribute>
+    <attribute id="REPORT_DIVISION1" order="28" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DIVISION1"/>
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_DIVISION1"/>
+    </attribute>
+    <attribute id="REPORT_DIVISION1_DESC" order="29" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DIVISION1_DESC"/>
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_DIVISION1_DESC"/>
+    </attribute>
+    <attribute id="REPORT_DEPARTMENT" order="30" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPARTMENT"/>
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_DEPARTMENT"/>
+    </attribute>
+    <attribute id="REPORT_DEPARTMENT_DESC" order="31" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPARTMENT_DESC"/>
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_DEPARTMENT_DESC"/>
+    </attribute>
+    <attribute id="REPORT_DEPARTMENT1" order="32" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPARTMENT1"/>
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_DEPARTMENT1"/>
+    </attribute>
+    <attribute id="REPORT_DEPARTMENT1_DESC" order="33" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPARTMENT1_DESC"/>
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_DEPARTMENT1_DESC"/>
+    </attribute>
+  
+    <attribute id="JG_CATEGORY" order="34" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="JG_CATEGORY"/>
+  
+      <keyMapping columnObjectName="Join_1" columnName="JG_CATEGORY"/>
+  
+    </attribute>
+  </attributes>
+  <calculatedAttributes>
+    <calculatedAttribute id="CC_NAME" order="19" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <keyCalculation datatype="NVARCHAR" expressionLanguage="SQL" length="13">
+        <formula>CONCAT(&quot;LASTNAME&quot;, &quot;FIRSTNAME&quot;)</formula>
+      </keyCalculation>
+      </calculatedAttribute>
+  </calculatedAttributes>
+  <baseMeasures/>
+  <calculatedMeasures>
+    <measure id="COMP_NUMBER" order="35" aggregationType="sum" measureType="simple" datatype="INTEGER" expressionLanguage="SQL">
+      <descriptions defaultDescription="Completed Number"/>
+      <formula>CASE &quot;CUSTOM05&quot; 
+	WHEN 'T/P' then
+	
+CASE WHEN ( &quot;NMP1&quot; IS NULL OR &quot;NMP1&quot; = '' ) THEN 0 ELSE 1 end
++
+CASE WHEN ( &quot;NMP4&quot; IS NULL OR &quot;NMP4&quot; = '' OR &quot;NMP4&quot; in ( 'Enrolled','Pending','Waitlist') ) THEN 0 ELSE 1 end	
+	 
+	 ELSE  
+ 
+CASE WHEN ( &quot;NMP1&quot; IS NULL OR &quot;NMP1&quot; = '' ) THEN 0 ELSE 1 end
++
+CASE WHEN ( &quot;NMP2&quot; IS NULL OR &quot;NMP2&quot; = '' OR &quot;NMP2&quot; = '-' OR &quot;NMP2&quot; in ( 'Enrolled','Pending','Waitlist') ) THEN 0 ELSE 1 end 
++
+CASE WHEN ( &quot;NMP3&quot; IS NULL OR &quot;NMP3&quot; = '' OR &quot;NMP3&quot; = '-'  OR &quot;NMP3&quot; in ( 'Enrolled','Pending','Waitlist') ) THEN 0 ELSE 1 end 
+
+END</formula>
+    
+      </measure>
+    <measure id="COMP_PERCENT" order="36" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="17" scale="2" expressionLanguage="SQL">
+      <descriptions defaultDescription="Completed Percent"/>
+      <formula>case &quot;CUSTOM05&quot;
+
+when 'T/P' then ( &quot;COMP_NUMBER&quot; / 2 )
+when 'M' then ( &quot;COMP_NUMBER&quot; / 3 )
+else 0
+
+end</formula>
+    
+      </measure>
+  </calculatedMeasures>
+  <restrictedMeasures/>
+  <localDimensions>
+    <localDimension id="ORGUNIT_H">
+      <attributeRef xsi:type="DataFoundation:Attribute">EXTERNALCODE</attributeRef>
+      <attributeRef xsi:type="DataFoundation:Attribute">PARENTDEPARTMENT</attributeRef>
+      <hierarchies>
+        <hierarchy xsi:type="Dimension:ParentChildHierarchy" id="ORGUNIT_H" aggregateAllNodes="false" defaultMember="4" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE_IF_DEFINED" cacheEnabled="true" cycleHandling="BREAKUP" emptyValueIsNull="false">
+          <descriptions defaultDescription="Orgunit Hierarchy"/>
+          <unassignedMemberProperties mode="FALSE"/>
+          <attributeParentPair attribute="EXTERNALCODE" parentAttribute="PARENTDEPARTMENT"/>
+        </hierarchy>
+      </hierarchies>
+    </localDimension>
+  </localDimensions>
+  <sharedDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="221" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="356"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="221" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="136"/>
+    </shape>
+    <shape modelObjectName="Projection_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="136"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302" y="356"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Join_1" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

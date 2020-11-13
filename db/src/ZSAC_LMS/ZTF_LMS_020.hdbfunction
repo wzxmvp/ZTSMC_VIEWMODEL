@@ -1,0 +1,150 @@
+FUNCTION "ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_020"( LANGUAGE NVARCHAR (2) )
+       	  RETURNS TABLE(
+			 "JOBLEVEL_CODE" NVARCHAR(32),
+			 "LOCATION_CODE" NVARCHAR(128),
+		     "USERID" NVARCHAR(32),
+		     "FIRSTNAME" NVARCHAR(128),
+		     "LASTNAME" NVARCHAR(128),
+		     "USERNAME" NVARCHAR(128),
+		     "ZFULLNAME" NVARCHAR(32),
+		     "BIZ_PHONE" NVARCHAR(32),
+		     "DEPARTMENT_CODE" NVARCHAR(32),
+		     "LEVEL_CODE" NVARCHAR(32),
+		     "MANAGER_LEVEL" NVARCHAR(32),
+		     "COMPULSORY" NVARCHAR(32),
+		     "EMP1" NVARCHAR(32),
+		     "EMP2" NVARCHAR(32),
+		     "EMP3" NVARCHAR(32) ,
+		     "EMP4" NVARCHAR(32),
+		     "EMP5" NVARCHAR(32),
+		     "EMP6" NVARCHAR(32),
+		     "EMP7" NVARCHAR(32) ,
+		     "EMP8" NVARCHAR(32),
+		     "EMP9" NVARCHAR(32),
+		     "EMP10" NVARCHAR(32),
+		    
+		     "MANAGER" NVARCHAR(32)
+       	  	
+       	  ) 
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+    /*****************************
+        Write your function logic
+    ****************************/
+return
+
+select 
+	   a."JOBLEVEL_CODE",
+       a."LOCATION_CODE",
+       a."USERID",
+       a."FIRSTNAME",
+       a."LASTNAME",
+       a."USERNAME",
+       a."ZFULLNAME",
+       a."BIZ_PHONE",
+       a."DEPARTMENT_CODE",
+       a."LEVEL_CODE",
+       a."MANAGER_LEVEL",
+       a."COMPULSORY",
+       b."EMP1",
+       b."EMP2",
+       b."EMP3",
+       b."EMP4",
+       b."EMP5",
+       b."EMP6",
+       b."EMP7",
+       b."EMP8",
+       b."EMP9",
+       b."EMP10",
+       a."MANAGER"
+              
+   FROM    "ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_USER"(:LANGUAGE) AS a
+   LEFT outer JOIN
+--從f表中根據完成日期和注冊狀態判定EMP課程字段的取值：
+--情況1：若完成狀態是0101，0106，0107，則顯示完訓日期值。
+--情況2：如果注册状态是ENROLL，完成狀態為空，则显示Enrolled。
+--情況3：若RTYP ID=01，注册状态是 空 则显示空。
+        ( select 
+          f."STUD_ID",
+          max( case 
+	           when f.CPNT_ID = 'MG1283' and f."CMPL_STAT_ID" in ('0101','0106','0107') then TO_CHAR(f.COMPL_DTE) 
+	           when f.CPNT_ID = 'MG1283' and f."ENRL_STAT_ID" = 'ENROLL' and f."CMPL_STAT_ID" = '' then 'Enrolled' 
+	           else ''
+           end)  as "EMP1",
+           max(case 
+	           when f.CPNT_ID = 'MG1115' and f."CMPL_STAT_ID" in ('0101','0106','0107') then TO_CHAR(f.COMPL_DTE) 
+	           when f.CPNT_ID = 'MG1115' and f."ENRL_STAT_ID" = 'ENROLL' and f."CMPL_STAT_ID" = '' then 'Enrolled'
+	           else '' 
+           end) as "EMP2",
+           max(case 
+	           when f.CPNT_ID = 'MG1656' and f."CMPL_STAT_ID" in ('0101','0106','0107') then TO_CHAR(f.COMPL_DTE) 
+	           when f.CPNT_ID = 'MG1656' and f."ENRL_STAT_ID" = 'ENROLL' and f."CMPL_STAT_ID" = '' then 'Enrolled'
+	           else '' 
+           end) as "EMP3",
+           max(case 
+	           when f.CPNT_ID = 'MG1278' and f."CMPL_STAT_ID" in ('0101','0106','0107') then TO_CHAR(f.COMPL_DTE) 
+	           when f.CPNT_ID = 'MG1278' and f."ENRL_STAT_ID" = 'ENROLL' and f."CMPL_STAT_ID" = '' then 'Enrolled'
+	           else '' 
+           end) as "EMP4",
+           max(case 
+	           when f.CPNT_ID = 'MG1279' and f."CMPL_STAT_ID" in ('0101','0106','0107') then TO_CHAR(f.COMPL_DTE) 
+	           when f.CPNT_ID = 'MG1279' and f."ENRL_STAT_ID" = 'ENROLL' and f."CMPL_STAT_ID" = '' then 'Enrolled'
+	           else '' 
+           end) as "EMP5",
+           max(case 
+	           when f.CPNT_ID = 'MG1280' and f."CMPL_STAT_ID" in ('0101','0106','0107') then TO_CHAR(f.COMPL_DTE) 
+	           when f.CPNT_ID = 'MG1280' and f."ENRL_STAT_ID" = 'ENROLL' and f."CMPL_STAT_ID" = '' then 'Enrolled'
+	           else '' 
+           end) as "EMP6",
+           max(case 
+	           when f.CPNT_ID = 'MG1280' and f."CMPL_STAT_ID" in ('0101','0106','0107') then TO_CHAR(f.COMPL_DTE) 
+	           when f.CPNT_ID = 'MG1280' and f."ENRL_STAT_ID" = 'ENROLL' and f."CMPL_STAT_ID" = '' then 'Enrolled'
+	           else '' 
+           end) as "EMP7",
+           max(case 
+	           when f.CPNT_ID = 'MG0691' and f."CMPL_STAT_ID" in ('0101','0106','0107') then TO_CHAR(f.COMPL_DTE) 
+	           when f.CPNT_ID = 'MG0691' and f."ENRL_STAT_ID" = 'ENROLL' and f."CMPL_STAT_ID" = '' then 'Enrolled'
+	           else '' 
+           end) as "EMP8",
+           max(case 
+	           when f.CPNT_ID = 'MG0579' and f."CMPL_STAT_ID" in ('0101','0106','0107') then TO_CHAR(f.COMPL_DTE) 
+	           when f.CPNT_ID = 'MG0579' and f."ENRL_STAT_ID" = 'ENROLL' and f."CMPL_STAT_ID" = '' then 'Enrolled'
+	           else '' 
+           end) as "EMP9",
+           max(case 
+	           when f.CPNT_ID = 'MG1277' and f."CMPL_STAT_ID" in ('0101','0106','0107') then TO_CHAR(f.COMPL_DTE) 
+	           when f.CPNT_ID = 'MG1277' and f."ENRL_STAT_ID" = 'ENROLL' and f."CMPL_STAT_ID" = '' then 'Enrolled'
+	           else '' 
+           end) as "EMP10"        
+        from 
+--從d表中查詢最新一條記錄的的完成日期、注冊狀態等信息。        
+            ( select 
+            d."STUD_ID",
+            d."CPNT_ID",
+            d."CPNT_TITLE_TW",
+            d."ASSGN_DTE",
+            e."COMPL_DTE",
+            e."ENRL_STAT_ID",
+            e."CMPL_STAT_ID"
+                from 
+--根據ASSGN_DTE獲取每個學員、每門課程記錄最新的一條記錄。               
+                  ( select 
+                   "STUD_ID",
+                   "CPNT_ID",
+                   "CPNT_TITLE_TW",
+                   max("ASSGN_DTE") as "ASSGN_DTE" 
+                   from "ZTSMC_VIEWMODEL.db::ZTAB_LMS_EMP_TRAIN"
+--                   where "STUD_ID"='000003' 
+                   GROUP BY "STUD_ID","CPNT_ID","CPNT_TITLE_TW" ) as d
+                   
+                     left outer join 
+                        "ZTSMC_VIEWMODEL.db::ZTAB_LMS_EMP_TRAIN" as e
+                     on d."STUD_ID" = e."STUD_ID"
+			         and d."CPNT_TITLE_TW" = e."CPNT_TITLE_TW"
+			         and d."ASSGN_DTE" = e."ASSGN_DTE"
+            )  as f GROUP BY f."STUD_ID") as b
+--       "ZTSMC_VIEWMODEL.db::ZTAB_LMS_EMP_TRAIN"  GROUP BY "STUD_ID") as b       
+       on ( a."USERID" = b."STUD_ID" )   
+where a."LEVEL_CODE" = '35' or a."LEVEL_CODE" = '36';    
+END;

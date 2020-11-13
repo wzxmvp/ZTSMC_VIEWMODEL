@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZCV_LMS_161" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="ZCV_LMS_161"/>
+<localVariables>
+  <variable id="LANGUAGE" parameter="true">
+    <descriptions defaultDescription=""/>
+    <variableProperties datatype="NVARCHAR" length="2" mandatory="false" defaultValue="TW">
+      <valueDomain type="StaticList">
+        <listEntry id="TW">
+          <descriptions defaultDescription="TW"/>
+        </listEntry>
+        <listEntry id="CN">
+          <descriptions defaultDescription="CN"/>
+        </listEntry>
+        <listEntry id="US">
+          <descriptions defaultDescription="US"/>
+        </listEntry>
+        <listEntry id="DF">
+          <descriptions defaultDescription="DF"/>
+        </listEntry>
+      </valueDomain>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_161">
+    <targetVariable name="LANGUAGE" resourceUri="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_161"/>
+    <localVariable>LANGUAGE</localVariable>
+  </mapping>
+</variableMappings>
+<dataSources>
+  <DataSource id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_161" type="TABLE_FUNCTION">
+    <resourceUri>ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_161</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="CPNT_SRC_ID"/>
+      <viewAttribute id="DEL_MTH_DESC"/>
+      <viewAttribute id="DEL_MTH_ID"/>
+      <viewAttribute id="COMPL_NUMBER"/>
+      <viewAttribute id="CPNT_TITLE"/>
+      <viewAttribute id="CPNT_LEN"/>
+      <viewAttribute id="CPNT_ID"/>
+      <viewAttribute id="JG_CATEGORY"/>
+      <viewAttribute id="CPNT_SRC_DESC"/>
+    
+      <viewAttribute id="CPNT_CLASSIFICATION"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_161"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Projection_1">
+  <attributes>
+    <attribute id="CPNT_CLASSIFICATION" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="課程類別"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CPNT_CLASSIFICATION"/>
+    </attribute>
+    <attribute id="CPNT_ID" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="課程編碼"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CPNT_ID"/>
+    </attribute>
+    <attribute id="CPNT_TITLE" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="課程名稱"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CPNT_TITLE"/>
+    </attribute>
+    <attribute id="DEL_MTH_ID" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DEL_MTH_ID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="DEL_MTH_ID"/>
+    </attribute>
+    <attribute id="DEL_MTH_DESC" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="授課方式"/>
+      <keyMapping columnObjectName="Projection_1" columnName="DEL_MTH_DESC"/>
+    </attribute>
+    <attribute id="CPNT_SRC_ID" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CPNT_SRC_ID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CPNT_SRC_ID"/>
+    </attribute>
+    <attribute id="CPNT_SRC_DESC" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="課程來源"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CPNT_SRC_DESC"/>
+    </attribute>
+    <attribute id="JG_CATEGORY" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="職類"/>
+      <keyMapping columnObjectName="Projection_1" columnName="JG_CATEGORY"/>
+    </attribute>
+    <attribute id="CPNT_LEN" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="課程時長"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CPNT_LEN"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="COMPL_NUMBER" order="10" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="完訓人數（去重）"/>
+      <measureMapping columnObjectName="Projection_1" columnName="COMPL_NUMBER"/>
+    </measure></baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+  <sharedDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="227"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="181"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

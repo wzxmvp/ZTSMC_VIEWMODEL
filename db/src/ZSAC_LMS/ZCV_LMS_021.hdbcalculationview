@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZCV_LMS_021" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="ZCV_LMS_021"/>
+<localVariables>
+  <variable id="VALID_DATE" parameter="true">
+    <descriptions defaultDescription="Org Valid Date"/>
+    <variableProperties datatype="DATE" mandatory="false" defaultValue="2020-09-24">
+      <valueDomain type="Date"/>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+
+  <variable id="LANGUAGE" parameter="true">
+    <descriptions defaultDescription="Language"/>
+    <variableProperties datatype="NVARCHAR" length="2" mandatory="false" defaultValue="TW">
+      <valueDomain type="StaticList">
+        <listEntry id="CN">
+          <descriptions defaultDescription="CN"/>
+        </listEntry>
+        <listEntry id="TW">
+          <descriptions defaultDescription="TW"/>
+        </listEntry>
+        <listEntry id="DF">
+          <descriptions defaultDescription="DF"/>
+        </listEntry>
+      
+        <listEntry id="US">
+          <descriptions defaultDescription="US"/>
+        </listEntry>
+      </valueDomain>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_020">
+    <targetVariable name="LANGUAGE" resourceUri="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_020"/>
+    <localVariable>LANGUAGE</localVariable>
+  </mapping>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_USER">
+    <targetVariable name="LANGUAGE" resourceUri="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_USER"/>
+    <localVariable>LANGUAGE</localVariable>
+  </mapping>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU">
+    <targetVariable name="LANGUAGE" resourceUri="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU"/>
+    <localVariable>LANGUAGE</localVariable>
+  </mapping>
+</variableMappings>
+<dataSources>
+  <DataSource id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_020" type="TABLE_FUNCTION">
+    <resourceUri>ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_020</resourceUri>
+  </DataSource>
+  <DataSource id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_USER" type="TABLE_FUNCTION">
+    <resourceUri>ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_USER</resourceUri>
+  </DataSource>
+  <DataSource id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU" type="TABLE_FUNCTION">
+    <resourceUri>ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="USERID"/>
+      <viewAttribute id="DEPARTMENT_CODE"/>
+    
+      <viewAttribute id="JOBLEVEL_CODE"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="All_Completed_Number" datatype="INTEGER" expressionLanguage="SQL">
+        <formula>case when &quot;Total_Number&quot; = 10  then 1 else 0 end</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="Total_Number" datatype="INTEGER" expressionLanguage="SQL">
+        <formula>1</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_020"/></calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="USERID"/>
+      <viewAttribute id="DEPARTMENT_CODE"/>
+    
+      <viewAttribute id="LEVEL_CODE"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="Total_Number" datatype="INTEGER" expressionLanguage="SQL">
+        <formula>1</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_USER"/>
+    <filter>&quot;LEVEL_CODE&quot; = '35' or &quot;LEVEL_CODE&quot; = '36'</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_1">
+    <viewAttributes>
+      <viewAttribute id="All_Completed_Number" aggregationType="sum"/>
+    
+      <viewAttribute id="DEPARTMENT_CODE"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Projection_1"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_2">
+    <viewAttributes>
+      <viewAttribute id="DEPARTMENT_CODE"/>
+      <viewAttribute id="Total_Number" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Projection_2"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="leftOuter">
+    <viewAttributes>
+      <viewAttribute id="Total_Number" aggregationType="sum"/>
+      <viewAttribute id="All_Completed_Number" aggregationType="sum"/>
+      <viewAttribute id="DEPARTMENT_CODE"/></viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Aggregation_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="All_Completed_Number" source="All_Completed_Number"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENT_CODE" source="DEPARTMENT_CODE"/></input>
+    <input node="Aggregation_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="Total_Number" source="Total_Number"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENT_CODE" source="DEPARTMENT_CODE"/>
+    </input>
+    <joinAttribute name="DEPARTMENT_CODE"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2" cardinality="CN_N" joinType="rightOuter">
+    <viewAttributes>
+      <viewAttribute id="Total_Number" aggregationType="sum"/>
+      <viewAttribute id="All_Completed_Number" aggregationType="sum"/>
+      <viewAttribute id="DEPARTMENT_CODE"/>
+      <viewAttribute id="EXTERNALCODE"/>
+      <viewAttribute id="EXTERNALCODE_DESC"/>
+      <viewAttribute id="PARENTDEPARTMENT"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Join_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="Total_Number" source="Total_Number"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="All_Completed_Number" source="All_Completed_Number"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENT_CODE" source="DEPARTMENT_CODE"/>
+    </input>
+    <input node="Projection_3">
+      <mapping xsi:type="Calculation:AttributeMapping" target="EXTERNALCODE" source="EXTERNALCODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EXTERNALCODE_DESC" source="EXTERNALCODE_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PARENTDEPARTMENT" source="PARENTDEPARTMENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENT_CODE" source="EXTERNALCODE"/>
+    </input>
+    <joinAttribute name="DEPARTMENT_CODE"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_3" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="EXTERNALCODE"/>
+      <viewAttribute id="EXTERNALCODE_DESC"/>
+      <viewAttribute id="PARENTDEPARTMENT"/>
+      <viewAttribute id="EFFECTIVESTARTDATE"/>
+      <viewAttribute id="EFFECTIVEENDDATE"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU"/>
+    <filter>&quot;EFFECTIVESTARTDATE&quot;&lt;='$$VALID_DATE$$' and &quot;EFFECTIVEENDDATE&quot;&gt;='$$VALID_DATE$$'</filter>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_2">
+  <attributes>
+    <attribute id="DEPARTMENT_CODE" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DEPARTMENT_CODE"/>
+      <keyMapping columnObjectName="Join_2" columnName="DEPARTMENT_CODE"/>
+    </attribute>
+  
+    <attribute id="EXTERNALCODE" order="5" descriptionColumnName="EXTERNALCODE_DESC" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EXTERNALCODE"/>
+  
+      <keyMapping columnObjectName="Join_2" columnName="EXTERNALCODE"/>
+  
+    </attribute>
+    <attribute id="EXTERNALCODE_DESC" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EXTERNALCODE_DESC"/>
+      <keyMapping columnObjectName="Join_2" columnName="EXTERNALCODE_DESC"/>
+    </attribute>
+    <attribute id="PARENTDEPARTMENT" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PARENTDEPARTMENT"/>
+      <keyMapping columnObjectName="Join_2" columnName="PARENTDEPARTMENT"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="Total_Number" order="1" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Total_Number"/>
+      <measureMapping columnObjectName="Join_2" columnName="Total_Number"/>
+    </measure>
+    <measure id="All_Completed_Number" order="2" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="All_Completed_Number"/>
+      <measureMapping columnObjectName="Join_2" columnName="All_Completed_Number"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures>
+    <measure id="All_Completed_Percent" order="3" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="17" scale="2" expressionLanguage="SQL">
+      <descriptions defaultDescription="All Completed Percent"/>
+      <formula>&quot;All_Completed_Number&quot;/&quot;Total_Number&quot;</formula>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      </measure>
+  </calculatedMeasures>
+  <restrictedMeasures/>
+  <localDimensions>
+    <localDimension id="ORGUNIT_H">
+      <attributeRef xsi:type="DataFoundation:Attribute">EXTERNALCODE</attributeRef>
+      <attributeRef xsi:type="DataFoundation:Attribute">PARENTDEPARTMENT</attributeRef>
+      <hierarchies>
+        <hierarchy xsi:type="Dimension:ParentChildHierarchy" id="ORGUNIT_H" aggregateAllNodes="false" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE_IF_DEFINED" cacheEnabled="true" cycleHandling="BREAKUP" emptyValueIsNull="false">
+          <descriptions defaultDescription="Orgunit Hierarchy"/>
+          <unassignedMemberProperties mode="FALSE"/>
+          <attributeParentPair attribute="EXTERNALCODE" parentAttribute="PARENTDEPARTMENT"/>
+        </hierarchy>
+      </hierarchies>
+    </localDimension>
+  </localDimensions>
+  <sharedDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="312" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="91" y="641"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="310" y="641"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Aggregation_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="91" y="536"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Aggregation_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="310" y="536"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="118" y="376"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Aggregation_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="202"/>
+    </shape>
+    <shape modelObjectName="Aggregation_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="312" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Join_1" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Projection_3" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="212"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_3" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="382" y="376"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Join_2" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="202"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario> 

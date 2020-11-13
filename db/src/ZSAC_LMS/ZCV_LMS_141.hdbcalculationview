@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZCV_LMS_141" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="ZCV_LMS_141"/>
+<localVariables>
+  <variable id="LANGUAGE" parameter="true">
+    <descriptions defaultDescription="Language"/>
+    <variableProperties datatype="NVARCHAR" length="2" mandatory="false" defaultValue="TW">
+      <valueDomain type="StaticList">
+        <listEntry id="TW">
+          <descriptions defaultDescription="TW"/>
+        </listEntry>
+        <listEntry id="CN">
+          <descriptions defaultDescription="CN"/>
+        </listEntry>
+        <listEntry id="US">
+          <descriptions defaultDescription="US"/>
+        </listEntry>
+        <listEntry id="DF">
+          <descriptions defaultDescription="DF"/>
+        </listEntry>
+      </valueDomain>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+  <variable id="VALID_DATE" parameter="true">
+    <descriptions defaultDescription="Org Valid Date"/>
+    <variableProperties datatype="DATE" mandatory="false" defaultValue="2020-10-19">
+      <valueDomain type="Date"/>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU">
+    <targetVariable name="LANGUAGE" resourceUri="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU"/>
+    <localVariable>LANGUAGE</localVariable>
+  </mapping>
+</variableMappings>
+<dataSources>
+  <DataSource id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_142" type="TABLE_FUNCTION">
+    <resourceUri>ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_142</resourceUri>
+  </DataSource>
+  <DataSource id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU" type="TABLE_FUNCTION">
+    <resourceUri>ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="STUD_ID"/>
+      <viewAttribute id="STUD_NAME"/>
+      <viewAttribute id="TOTAL_NUMBER"/>
+      <viewAttribute id="COMPL_NUMBER"/>
+      <viewAttribute id="UNCOMPL_NUMBER"/>
+      <viewAttribute id="CYTOTAL_NUMBER"/>
+      <viewAttribute id="CYCOMPL_NUMBER"/>
+      <viewAttribute id="CYUNCOMPL_NUMBER"/>
+      <viewAttribute id="CYONCOMPL_NUMBER"/>
+      <viewAttribute id="NEW_MONTH_3"/>
+      <viewAttribute id="NEW_MONTH_6"/>
+      <viewAttribute id="NEW_MONTH_9"/>
+      <viewAttribute id="NEW_MONTH_12"/>
+      <viewAttribute id="NEW_MONTH_24"/>
+      <viewAttribute id="CY_TRAIN_RECORDS"/>
+      <viewAttribute id="TGT_TRAIN_HOURS"/>
+      <viewAttribute id="ACT_TRAIN_HOURS"/>
+      <viewAttribute id="TOT_TRAIN_RECORDS"/>
+      <viewAttribute id="TOT_TRAIN_HOURS"/>
+      <viewAttribute id="DEPARTMENT_CODE"/>
+    
+      <viewAttribute id="CYEXP_COMPL_NUMBER"/>
+      <viewAttribute id="CYREMAIN_DAYS"/>
+    
+      <viewAttribute id="CYONT_COMPL_NUMBER"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="NEW_MONTH3_NUM" datatype="INTEGER" expressionLanguage="SQL">
+        <formula>CASE  &quot;NEW_MONTH_3&quot;
+	 WHEN 'Y' then 1
+	 ELSE 0 
+ END</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="NEW_MONTH6_NUM" datatype="INTEGER" expressionLanguage="SQL">
+        <formula>CASE &quot;NEW_MONTH_6&quot; 
+	 WHEN 'Y' then 1 
+	 ELSE 0 
+ END</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="NEW_MONTH9_NUM" datatype="INTEGER" expressionLanguage="SQL">
+        <formula>CASE &quot;NEW_MONTH_9&quot; 
+	 WHEN 'Y' then 1 
+	 ELSE 0 
+ END</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="NEW_MONTH12_NUM" datatype="INTEGER" expressionLanguage="SQL">
+        <formula>CASE &quot;NEW_MONTH_12&quot; 
+	 WHEN 'Y' then 1 
+	 ELSE 0 
+ END</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="NEW_MONTH24_NUM" datatype="INTEGER" expressionLanguage="SQL">
+        <formula>CASE &quot;NEW_MONTH_24&quot; 
+	 WHEN 'Y' then 1 
+	 ELSE 0 
+ END</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_142"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="EXTERNALCODE"/>
+      <viewAttribute id="EXTERNALCODE_DESC"/>
+      <viewAttribute id="PARENTDEPARTMENT"/>
+      <viewAttribute id="EFFECTIVESTARTDATE"/>
+      <viewAttribute id="EFFECTIVEENDDATE"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU"/>
+    <filter>&quot;EFFECTIVESTARTDATE&quot; &lt;= '$$VALID_DATE$$' AND '$$VALID_DATE$$' &lt;= &quot;EFFECTIVEENDDATE&quot;</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="rightOuter">
+    <viewAttributes>
+      <viewAttribute id="STUD_ID"/>
+      <viewAttribute id="STUD_NAME"/>
+      <viewAttribute id="TOTAL_NUMBER" aggregationType="sum"/>
+      <viewAttribute id="COMPL_NUMBER" aggregationType="sum"/>
+      <viewAttribute id="UNCOMPL_NUMBER" aggregationType="sum"/>
+      <viewAttribute id="CYTOTAL_NUMBER" aggregationType="sum"/>
+      <viewAttribute id="CYCOMPL_NUMBER" aggregationType="sum"/>
+      <viewAttribute id="CYUNCOMPL_NUMBER" aggregationType="sum"/>
+      <viewAttribute id="CYONCOMPL_NUMBER" aggregationType="sum"/>
+      <viewAttribute id="CY_TRAIN_RECORDS" aggregationType="sum"/>
+      <viewAttribute id="TGT_TRAIN_HOURS" aggregationType="sum"/>
+      <viewAttribute id="ACT_TRAIN_HOURS" aggregationType="sum"/>
+      <viewAttribute id="TOT_TRAIN_RECORDS" aggregationType="sum"/>
+      <viewAttribute id="TOT_TRAIN_HOURS" aggregationType="sum"/>
+      <viewAttribute id="DEPARTMENT_CODE"/>
+      <viewAttribute id="NEW_MONTH3_NUM" aggregationType="sum"/>
+      <viewAttribute id="NEW_MONTH6_NUM" aggregationType="sum"/>
+      <viewAttribute id="NEW_MONTH9_NUM" aggregationType="sum"/>
+      <viewAttribute id="NEW_MONTH12_NUM" aggregationType="sum"/>
+      <viewAttribute id="NEW_MONTH24_NUM" aggregationType="sum"/>
+      <viewAttribute id="EXTERNALCODE"/>
+      <viewAttribute id="EXTERNALCODE_DESC"/>
+      <viewAttribute id="PARENTDEPARTMENT"/>
+    
+      <viewAttribute id="CYEXP_COMPL_NUMBER" aggregationType="sum"/>
+      <viewAttribute id="CYREMAIN_DAYS" aggregationType="sum"/>
+    
+      <viewAttribute id="CYONT_COMPL_NUMBER" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="STUD_ID" source="STUD_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STUD_NAME" source="STUD_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOTAL_NUMBER" source="TOTAL_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMPL_NUMBER" source="COMPL_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="UNCOMPL_NUMBER" source="UNCOMPL_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CYTOTAL_NUMBER" source="CYTOTAL_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CYCOMPL_NUMBER" source="CYCOMPL_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CYUNCOMPL_NUMBER" source="CYUNCOMPL_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CYONCOMPL_NUMBER" source="CYONCOMPL_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CY_TRAIN_RECORDS" source="CY_TRAIN_RECORDS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TGT_TRAIN_HOURS" source="TGT_TRAIN_HOURS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ACT_TRAIN_HOURS" source="ACT_TRAIN_HOURS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOT_TRAIN_RECORDS" source="TOT_TRAIN_RECORDS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOT_TRAIN_HOURS" source="TOT_TRAIN_HOURS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENT_CODE" source="DEPARTMENT_CODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NEW_MONTH3_NUM" source="NEW_MONTH3_NUM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NEW_MONTH6_NUM" source="NEW_MONTH6_NUM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NEW_MONTH9_NUM" source="NEW_MONTH9_NUM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NEW_MONTH12_NUM" source="NEW_MONTH12_NUM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NEW_MONTH24_NUM" source="NEW_MONTH24_NUM"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="CYEXP_COMPL_NUMBER" source="CYEXP_COMPL_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CYREMAIN_DAYS" source="CYREMAIN_DAYS"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="CYONT_COMPL_NUMBER" source="CYONT_COMPL_NUMBER"/>
+    </input>
+    <input node="Projection_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="EXTERNALCODE" source="EXTERNALCODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EXTERNALCODE_DESC" source="EXTERNALCODE_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PARENTDEPARTMENT" source="PARENTDEPARTMENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENT_CODE" source="EXTERNALCODE"/>
+    </input>
+    <joinAttribute name="DEPARTMENT_CODE"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="EXTERNALCODE" order="1" displayAttribute="false" attributeHierarchyActive="false" descriptionColumnName="EXTERNALCODE_DESC">
+      <descriptions defaultDescription="組織代碼"/>
+      <keyMapping columnObjectName="Join_1" columnName="EXTERNALCODE"/>
+    </attribute>
+    <attribute id="EXTERNALCODE_DESC" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="組織名稱"/>
+      <keyMapping columnObjectName="Join_1" columnName="EXTERNALCODE_DESC"/>
+    </attribute>
+    <attribute id="DEPARTMENT_CODE" order="28" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DEPARTMENT_CODE"/>
+      <keyMapping columnObjectName="Join_1" columnName="DEPARTMENT_CODE"/>
+    </attribute>
+    <attribute id="PARENTDEPARTMENT" order="29" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PARENTDEPARTMENT"/>
+      <keyMapping columnObjectName="Join_1" columnName="PARENTDEPARTMENT"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="TOTAL_NUMBER" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="全部必修課 項目數"/>
+      <measureMapping columnObjectName="Join_1" columnName="TOTAL_NUMBER"/>
+    </measure>
+    <measure id="COMPL_NUMBER" order="4" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="全部必修課 項目完成數"/>
+      <measureMapping columnObjectName="Join_1" columnName="COMPL_NUMBER"/>
+    </measure>
+    <measure id="UNCOMPL_NUMBER" order="5" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="全部必修課 未完成數"/>
+      <measureMapping columnObjectName="Join_1" columnName="UNCOMPL_NUMBER"/>
+    </measure>
+    <measure id="CYTOTAL_NUMBER" order="7" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="今年度必修課 數量"/>
+      <measureMapping columnObjectName="Join_1" columnName="CYTOTAL_NUMBER"/>
+    </measure>
+    <measure id="CYCOMPL_NUMBER" order="8" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="今年度必修課 完成數"/>
+      <measureMapping columnObjectName="Join_1" columnName="CYCOMPL_NUMBER"/>
+    </measure>
+    <measure id="CYUNCOMPL_NUMBER" order="9" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="今年度必修課 未完成數"/>
+      <measureMapping columnObjectName="Join_1" columnName="CYUNCOMPL_NUMBER"/>
+    </measure>
+    <measure id="CYONCOMPL_NUMBER" order="10" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="今年度必修課逾期未完成數"/>
+      <measureMapping columnObjectName="Join_1" columnName="CYONCOMPL_NUMBER"/>
+    </measure>
+    <measure id="NEW_MONTH3_NUM" order="15" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="3 個月新人數"/>
+      <measureMapping columnObjectName="Join_1" columnName="NEW_MONTH3_NUM"/>
+    </measure>
+    <measure id="NEW_MONTH6_NUM" order="16" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="6 個月新人數"/>
+      <measureMapping columnObjectName="Join_1" columnName="NEW_MONTH6_NUM"/>
+    </measure>
+    <measure id="NEW_MONTH9_NUM" order="17" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="9 個月新人數"/>
+      <measureMapping columnObjectName="Join_1" columnName="NEW_MONTH9_NUM"/>
+    </measure>
+    <measure id="NEW_MONTH12_NUM" order="18" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="12 個月新人數"/>
+      <measureMapping columnObjectName="Join_1" columnName="NEW_MONTH12_NUM"/>
+    </measure>
+    <measure id="NEW_MONTH24_NUM" order="19" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="24 個月新人數"/>
+      <measureMapping columnObjectName="Join_1" columnName="NEW_MONTH24_NUM"/>
+    </measure>
+    <measure id="CY_TRAIN_RECORDS" order="20" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="今年度訓練記錄"/>
+      <measureMapping columnObjectName="Join_1" columnName="CY_TRAIN_RECORDS"/>
+    </measure>
+    <measure id="ACT_TRAIN_HOURS" order="21" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="今年度實際訓練時數"/>
+      <measureMapping columnObjectName="Join_1" columnName="ACT_TRAIN_HOURS"/>
+    </measure>
+    <measure id="TGT_TRAIN_HOURS" order="22" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="今年度目標訓練時數"/>
+      <measureMapping columnObjectName="Join_1" columnName="TGT_TRAIN_HOURS"/>
+    </measure>
+    <measure id="TOT_TRAIN_RECORDS" order="23" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="全部訓練時數"/>
+      <measureMapping columnObjectName="Join_1" columnName="TOT_TRAIN_RECORDS"/>
+    </measure>
+    <measure id="TOT_TRAIN_HOURS" order="24" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="全部訓練時數"/>
+      <measureMapping columnObjectName="Join_1" columnName="TOT_TRAIN_HOURS"/>
+    </measure>
+    <measure id="CYREMAIN_DAYS" order="25" aggregationType="sum" measureType="simple" hidden="true">
+      <descriptions defaultDescription="CYREMAIN_DAYS"/>
+      <measureMapping columnObjectName="Join_1" columnName="CYREMAIN_DAYS"/>
+    </measure>
+  
+  
+    <measure id="CYEXP_COMPL_NUMBER" order="26" aggregationType="sum" measureType="simple" hidden="true">
+      <descriptions defaultDescription="CYEXP_COMPL_NUMBER"/>
+      <measureMapping columnObjectName="Join_1" columnName="CYEXP_COMPL_NUMBER"/>
+    </measure>
+    <measure id="CYONT_COMPL_NUMBER" hidden="true" order="27" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="CYONT_COMPL_NUMBER"/>
+      <measureMapping columnObjectName="Join_1" columnName="CYONT_COMPL_NUMBER"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures>
+    <measure id="TOTCOMPL_PERCENT" order="6" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="17" scale="2" expressionLanguage="SQL">
+      <descriptions defaultDescription="全部必修課 完成率"/>
+      <formula>&quot;COMPL_NUMBER&quot;/&quot;TOTAL_NUMBER&quot;</formula>
+      </measure>
+    <measure id="EXPCOMPL_PERCENT" order="11" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="17" scale="2" expressionLanguage="SQL">
+      <descriptions defaultDescription="今年度必修課 目標完成率"/>
+      <formula>&quot;CYEXP_COMPL_NUMBER&quot;/&quot;TOTAL_NUMBER&quot;</formula>
+      </measure>
+    <measure id="ACTCOMPL_PERCENT" order="12" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="17" scale="2" expressionLanguage="SQL">
+      <descriptions defaultDescription="今年度必修課 實際完成率"/>
+      <formula>&quot;CYCOMPL_NUMBER&quot;/&quot;CYTOTAL_NUMBER&quot;</formula>
+      </measure>
+    <measure id="ONTCOMPL_PERCENT" order="13" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="17" scale="2" expressionLanguage="SQL">
+      <descriptions defaultDescription="今年度必修課 如期完成率"/>
+      <formula>&quot;CYONT_COMPL_NUMBER&quot;/&quot;CYTOTAL_NUMBER&quot;</formula>
+      </measure>
+    <measure id="TARGET_REAMIN_DAYS" order="14" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="17" scale="2" expressionLanguage="SQL">
+      <descriptions defaultDescription="抵達培訓目標尚餘天數"/>
+      <formula>&quot;CYREMAIN_DAYS&quot;/&quot;UNCOMPL_NUMBER&quot;</formula>
+      </measure>
+  </calculatedMeasures>
+  <restrictedMeasures/>
+  <localDimensions>
+    <localDimension id="ORGUNIT_H">
+      <attributeRef xsi:type="DataFoundation:Attribute">EXTERNALCODE</attributeRef>
+      <attributeRef xsi:type="DataFoundation:Attribute">PARENTDEPARTMENT</attributeRef>
+      <hierarchies>
+        <hierarchy xsi:type="Dimension:ParentChildHierarchy" id="ORGUNIT_H" aggregateAllNodes="false" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE_IF_DEFINED" cacheEnabled="true" cycleHandling="BREAKUP" emptyValueIsNull="false">
+          <descriptions defaultDescription="ORGUNIT_H"/>
+          <unassignedMemberProperties mode="FALSE"/>
+          <attributeParentPair attribute="EXTERNALCODE" parentAttribute="PARENTDEPARTMENT"/>
+        </hierarchy>
+      </hierarchies>
+    </localDimension>
+  </localDimensions>
+  <sharedDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="221" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="356"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302" y="356"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="221" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="210"/>
+    </shape>
+    <shape modelObjectName="Projection_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="212"/>
+    </shape>
+    <shape modelObjectName="Join_1" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

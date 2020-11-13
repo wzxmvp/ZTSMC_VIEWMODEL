@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::T_ORGUNIT" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="T_ORGUNIT"/>
+<localVariables>
+  <variable id="KEY_DATE" parameter="true">
+    <descriptions defaultDescription="Key Date"/>
+    <variableProperties datatype="DATE" mandatory="false" defaultExpressionLanguage="SQL">
+      <valueDomain type="Date"/>
+      <selection multiLine="false" type="SingleValue"/>
+      <defaultRange lowValue="CURRENT_DATE" lowExpression="true" operator="EQ" including="true"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="ZTSMC_VIEWMODEL.db::ZTAB_EC_ORG_UNIT">
+    <targetVariable name="KEY_DATE" resourceUri="ZTSMC_VIEWMODEL.db::ZTAB_EC_ORG_UNIT"/>
+    <localVariable>KEY_DATE</localVariable>
+  </mapping>
+</variableMappings>
+<dataSources>
+  <DataSource id="ZTSMC_VIEWMODEL.db::ZTAB_EC_ORG_UNIT">
+    <resourceUri>ZTSMC_VIEWMODEL.db::ZTAB_EC_ORG_UNIT</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="CUST_CM"/>
+      <viewAttribute id="CUST_CM1"/>
+      <viewAttribute id="CUST_GM"/>
+      <viewAttribute id="CUST_GM1"/>
+      <viewAttribute id="CUST_AREA"/>
+      <viewAttribute id="CUST_AREA1"/>
+      <viewAttribute id="CUST_FUNCTION"/>
+      <viewAttribute id="CUST_FUNCTION1"/>
+      <viewAttribute id="CUST_DIVISION"/>
+      <viewAttribute id="CUST_DIVISION1"/>
+      <viewAttribute id="CUST_DEPARTMENT"/>
+      <viewAttribute id="CUST_DEPARTMENT1"/>
+      <viewAttribute id="CUST_SECTION"/>
+      <viewAttribute id="CUST_SECTION1"/>
+      <viewAttribute id="CUST_CHANGEREASON"/>
+      <viewAttribute id="EXTERNALCODE"/>
+      <viewAttribute id="CUST_TYPE"/>
+      <viewAttribute id="NAME_ZH_CN"/>
+      <viewAttribute id="NAME_ZH_TW"/>
+      <viewAttribute id="NAME_ZH_US"/>
+      <viewAttribute id="NAME_DEFAULT"/>
+      <viewAttribute id="DESC_ZH_CN"/>
+      <viewAttribute id="DESC_ZH_TW"/>
+      <viewAttribute id="DESC_ZH_US"/>
+      <viewAttribute id="DESC_DEFAULT"/>
+      <viewAttribute id="EFFECTIVESTATUS"/>
+      <viewAttribute id="EFFECTIVESTARTDATE"/>
+      <viewAttribute id="EFFECTIVEENDDATE"/>
+    
+      <viewAttribute id="PARENTDEPARTMENT"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="ZTSMC_VIEWMODEL.db::ZTAB_EC_ORG_UNIT"/>
+    <filter>&quot;EFFECTIVESTARTDATE&quot; &lt;= '$$KEY_DATE$$' and &quot;EFFECTIVEENDDATE&quot; &gt;= '$$KEY_DATE$$'</filter>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Projection_1">
+  <attributes>
+    <attribute id="CUST_CM" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CM"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUST_CM"/>
+    </attribute>
+    <attribute id="CUST_CM1" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CM1"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUST_CM1"/>
+    </attribute>
+    <attribute id="CUST_GM" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="GM"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUST_GM"/>
+    </attribute>
+    <attribute id="CUST_GM1" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="GM1"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUST_GM1"/>
+    </attribute>
+    <attribute id="CUST_AREA" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Area"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUST_AREA"/>
+    </attribute>
+    <attribute id="CUST_AREA1" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Area1"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUST_AREA1"/>
+    </attribute>
+    <attribute id="CUST_FUNCTION" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Function"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUST_FUNCTION"/>
+    </attribute>
+    <attribute id="CUST_FUNCTION1" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Function1"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUST_FUNCTION1"/>
+    </attribute>
+    <attribute id="CUST_DIVISION" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Division"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUST_DIVISION"/>
+    </attribute>
+    <attribute id="CUST_DIVISION1" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Division1"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUST_DIVISION1"/>
+    </attribute>
+    <attribute id="CUST_DEPARTMENT" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Department"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUST_DEPARTMENT"/>
+    </attribute>
+    <attribute id="CUST_DEPARTMENT1" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Department1"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUST_DEPARTMENT1"/>
+    </attribute>
+    <attribute id="CUST_SECTION" order="13" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Section"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUST_SECTION"/>
+    </attribute>
+    <attribute id="CUST_SECTION1" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Section1"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUST_SECTION1"/>
+    </attribute>
+    <attribute id="CUST_CHANGEREASON" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="變更原因"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUST_CHANGEREASON"/>
+    </attribute>
+    <attribute id="EXTERNALCODE" order="16" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Department/組織編碼"/>
+      <keyMapping columnObjectName="Projection_1" columnName="EXTERNALCODE"/>
+    </attribute>
+    <attribute id="CUST_TYPE" order="17" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Type/組織類型"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUST_TYPE"/>
+    </attribute>
+    <attribute id="NAME_ZH_CN" order="18" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Short Description/簡體中文組織短名稱"/>
+      <keyMapping columnObjectName="Projection_1" columnName="NAME_ZH_CN"/>
+    </attribute>
+    <attribute id="NAME_ZH_TW" order="19" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Short Description/繁體中文組織短名稱"/>
+      <keyMapping columnObjectName="Projection_1" columnName="NAME_ZH_TW"/>
+    </attribute>
+    <attribute id="NAME_ZH_US" order="20" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Short Description/英文組織短名稱"/>
+      <keyMapping columnObjectName="Projection_1" columnName="NAME_ZH_US"/>
+    </attribute>
+    <attribute id="NAME_DEFAULT" order="21" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Short Description/組織短名-系統默認語言"/>
+      <keyMapping columnObjectName="Projection_1" columnName="NAME_DEFAULT"/>
+    </attribute>
+    <attribute id="DESC_ZH_CN" order="22" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Description/簡體中文組織全稱"/>
+      <keyMapping columnObjectName="Projection_1" columnName="DESC_ZH_CN"/>
+    </attribute>
+    <attribute id="DESC_ZH_TW" order="23" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Description/繁體中文組織全稱"/>
+      <keyMapping columnObjectName="Projection_1" columnName="DESC_ZH_TW"/>
+    </attribute>
+    <attribute id="DESC_ZH_US" order="24" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Description/英文組織全稱"/>
+      <keyMapping columnObjectName="Projection_1" columnName="DESC_ZH_US"/>
+    </attribute>
+    <attribute id="DESC_DEFAULT" order="25" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Description/組織全稱-系統默認語言"/>
+      <keyMapping columnObjectName="Projection_1" columnName="DESC_DEFAULT"/>
+    </attribute>
+    <attribute id="EFFECTIVESTATUS" order="26" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="狀態"/>
+      <keyMapping columnObjectName="Projection_1" columnName="EFFECTIVESTATUS"/>
+    </attribute>
+    <attribute id="EFFECTIVESTARTDATE" order="27" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="生效開始日期"/>
+      <keyMapping columnObjectName="Projection_1" columnName="EFFECTIVESTARTDATE"/>
+    </attribute>
+    <attribute id="EFFECTIVEENDDATE" order="28" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="生效結束日期"/>
+      <keyMapping columnObjectName="Projection_1" columnName="EFFECTIVEENDDATE"/>
+    </attribute>
+  
+    <attribute id="PARENTDEPARTMENT" order="30" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="上級組織"/>
+  
+      <keyMapping columnObjectName="Projection_1" columnName="PARENTDEPARTMENT"/>
+  
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures>
+    <measure id="CC_1" order="29" aggregationType="sum" measureType="simple" datatype="INTEGER" expressionLanguage="SQL">
+      <formula>1</formula>
+    </measure>
+  </calculatedMeasures>
+  <restrictedMeasures/>
+  <localDimensions>
+    <localDimension id="LEVEL_1">
+      <attributeRef xsi:type="DataFoundation:Attribute">CUST_CM</attributeRef>
+      <attributeRef xsi:type="DataFoundation:Attribute">CUST_GM</attributeRef>
+      <attributeRef xsi:type="DataFoundation:Attribute">CUST_AREA</attributeRef>
+      <attributeRef xsi:type="DataFoundation:Attribute">CUST_FUNCTION</attributeRef>
+      <attributeRef xsi:type="DataFoundation:Attribute">CUST_DIVISION</attributeRef>
+      <attributeRef xsi:type="DataFoundation:Attribute">CUST_DEPARTMENT</attributeRef>
+      <hierarchies>
+        <hierarchy xsi:type="Dimension:LeveledHierarchy" id="LEVEL_1" aggregateAllNodes="false" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="NAME_PATH_ENFORCED" cacheEnabled="true" cycleHandling="BREAKUP" emptyValueIsNull="true">
+          <descriptions defaultDescription=""/>
+          <unassignedMemberProperties mode="FALSE"/>
+          <levels>
+            <level levelAttribute="CUST_CM" levelType="MDLEVEL_TYPE_REGULAR" order="1" orderAttribute="CUST_CM" sortDirection="ASC"/>
+            <level levelAttribute="CUST_GM" levelType="MDLEVEL_TYPE_REGULAR" order="2" orderAttribute="CUST_GM" sortDirection="ASC"/>
+            <level levelAttribute="CUST_AREA" levelType="MDLEVEL_TYPE_REGULAR" order="3" orderAttribute="CUST_AREA" sortDirection="ASC"/>
+            <level levelAttribute="CUST_FUNCTION" levelType="MDLEVEL_TYPE_REGULAR" order="4" orderAttribute="CUST_FUNCTION" sortDirection="ASC"/>
+            <level levelAttribute="CUST_DIVISION" levelType="MDLEVEL_TYPE_REGULAR" order="5" orderAttribute="CUST_DIVISION" sortDirection="ASC"/>
+            <level levelAttribute="CUST_DEPARTMENT" levelType="MDLEVEL_TYPE_REGULAR" order="6" orderAttribute="CUST_DEPARTMENT" sortDirection="ASC"/>
+          </levels>
+        </hierarchy>
+      </hierarchies>
+    </localDimension>
+    <localDimension id="PARENT_1">
+      <attributeRef xsi:type="DataFoundation:Attribute">EXTERNALCODE</attributeRef>
+      <attributeRef xsi:type="DataFoundation:Attribute">PARENTDEPARTMENT</attributeRef>
+      <hierarchies>
+        <hierarchy xsi:type="Dimension:ParentChildHierarchy" id="PARENT_1" aggregateAllNodes="false" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE_IF_DEFINED" cacheEnabled="true" cycleHandling="BREAKUP" emptyValueIsNull="false">
+          <descriptions defaultDescription=""/>
+          <unassignedMemberProperties mode="FALSE"/>
+          <attributeParentPair attribute="EXTERNALCODE" parentAttribute="PARENTDEPARTMENT"/>
+        </hierarchy>
+      </hierarchies>
+    </localDimension>
+  </localDimensions>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="92" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

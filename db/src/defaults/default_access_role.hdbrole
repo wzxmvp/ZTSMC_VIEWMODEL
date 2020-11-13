@@ -1,0 +1,23 @@
+{
+	"role": {
+		"name": "default_access_role",
+		"object_privileges": [{
+			"name": "ZTSMC_VIEWMODEL.db.ZSAC_LMS::T_Hierarchy",
+			"type": "VIEW",
+			"privileges": [
+				"SELECT"
+			]
+		}],
+		"schema_privileges": [{
+			"privileges": [
+				"EXECUTE",
+				"SELECT"
+			]
+		}],
+		"schema_analytic_privileges": [{
+			"privileges": [
+				"ZTSMC_VIEWMODEL.db.ZSAC_LMS::T_AP_TEST"
+			]
+		}]
+	}
+}

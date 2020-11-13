@@ -1,0 +1,162 @@
+FUNCTION "ZTSMC_VIEWMODEL.db.ZSAC_LMS::T_LANGUAGE"( LANGUAGE NVARCHAR(2))
+       	  RETURNS TABLE(
+	 "JOBLEVEL" NVARCHAR(32),
+	 "LOCATION" NVARCHAR(128),
+     "USERID" NVARCHAR(32),
+     "FIRSTNAME" NVARCHAR(128),
+     "LASTNAME" NVARCHAR(128),
+     "USERNAME" NVARCHAR(128),
+     "BIZ_PHONE" NVARCHAR(32),
+     "DEPARTMENT" NVARCHAR(32),
+     "EXTCODE_DESC" NVARCHAR(90),
+     "CUST_AREA" NVARCHAR(32),
+	 "CUST_FUNCTION" NVARCHAR(32),
+	 "CUST_DIVISION" NVARCHAR(32),
+	 "AREA_DESC" NVARCHAR(90),
+	 "FUNC_DESC" NVARCHAR(90),
+	 "DIVI_DESC" NVARCHAR(90),
+	 "DEPT_DESC" NVARCHAR(90),
+     "EMP1" NVARCHAR(32),
+     "EMP2" NVARCHAR(32),
+     "EMP3" NVARCHAR(32) ,
+     "EMP4" NVARCHAR(32),
+     "EMP5" NVARCHAR(32),
+     "EMP6" NVARCHAR(32),
+     "EMP7" NVARCHAR(32) ,
+     "EMP8" NVARCHAR(32),
+     "EMP9" NVARCHAR(32),
+     "EMP10" NVARCHAR(32),
+    
+     "MANAGER" NVARCHAR(32)) 
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+    /*****************************
+        Write your function logic
+    ****************************/
+return
+
+select a."JOBLEVEL",
+       a."LOCATION",
+       a."USERID",
+       a."FIRSTNAME",
+       a."LASTNAME",
+       a."USERNAME",
+       a."BIZ_PHONE",
+       a."DEPARTMENT",
+--       c."DESC_ZH_CN",
+--       c."DESC_ZH_TW",
+--       c."DESC_ZH_US",
+--       c."DESC_DEFAULT",
+      CASE WHEN :LANGUAGE = 'ZH' THEN "DESC_ZH_CN"
+           WHEN :LANGUAGE = 'TW' THEN "DESC_ZH_TW"
+           WHEN :LANGUAGE = 'US' THEN "DESC_ZH_US"
+           ELSE "DESC_DEFAULT"       
+      END as EXTCODE_DESC,
+       c."CUST_AREA",
+       c."CUST_FUNCTION",
+       c."CUST_DIVISION",
+--       c."AREA_DESC_CN",
+--       c."AREA_DESC_TW",
+--       c."AREA_DESC_US",
+--       c."AREA_DEFAULT",
+      CASE WHEN :LANGUAGE = 'ZH' THEN "AREA_DESC_CN"
+           WHEN :LANGUAGE = 'TW' THEN "AREA_DESC_TW"
+           WHEN :LANGUAGE = 'US' THEN "AREA_DESC_US"
+           ELSE "AREA_DEFAULT"       
+      END as "AREA_DESC",     
+--       c."FUNC_DESC_CN",
+--       c."FUNC_DESC_TW",
+--       c."FUNC_DESC_US",
+--       c."FUNC_DEFAULT",
+      CASE WHEN :LANGUAGE = 'ZH' THEN "FUNC_DESC_CN"
+           WHEN :LANGUAGE = 'TW' THEN "FUNC_DESC_TW"
+           WHEN :LANGUAGE = 'US' THEN "FUNC_DESC_US"
+           ELSE "FUNC_DEFAULT"       
+      END as "FUNC_DESC",        
+--       c."DIVI_DESC_CN",
+--       c."DIVI_DESC_TW",
+--       c."DIVI_DESC_US",
+--       c."DIVI_DEFAULT",
+      CASE WHEN :LANGUAGE = 'ZH' THEN "DIVI_DESC_CN"
+           WHEN :LANGUAGE = 'TW' THEN "DIVI_DESC_TW"
+           WHEN :LANGUAGE = 'US' THEN "DIVI_DESC_US"
+           ELSE "DIVI_DEFAULT"       
+      END  as "DIVI_DESC",       
+--       c."DEPT_DESC_CN",
+--       c."DEPT_DESC_TW",
+--       c."DEPT_DESC_US",
+--       c."DEPT_DEFAULT",
+       CASE WHEN :LANGUAGE = 'ZH' THEN "DEPT_DESC_CN"
+           WHEN :LANGUAGE = 'TW' THEN "DEPT_DESC_TW"
+           WHEN :LANGUAGE = 'US' THEN "DEPT_DESC_US"
+           ELSE "DEPT_DEFAULT"       
+      END as "DEPT_DESC",      
+       b."EMP1",
+       b."EMP2",
+       b."EMP3",
+       b."EMP4",
+       b."EMP5",
+       b."EMP6",
+       b."EMP7",
+       b."EMP8",
+       b."EMP9",
+       b."EMP10",
+       a."MANAGER"
+              
+   FROM    "ZTSMC_VIEWMODEL.db::ZTAB_EC_USER" AS a
+   LEFT outer JOIN (select 
+          "STUD_ID",
+           max(case when substr(CPNT_TITLE_TW,1,4) = 'EMP1' and substr(CPNT_TITLE_TW,1,5) != 'EMP10' then TO_CHAR (COMPL_DTE) else '' end)  as "EMP1",
+           max(case when CPNT_TITLE_TW like  'EMP2%' then TO_CHAR (COMPL_DTE) else '' end) as "EMP2",
+           max(case when CPNT_TITLE_TW like 'EMP3%' then TO_CHAR (COMPL_DTE) else '' end) as "EMP3",
+           max(case when CPNT_TITLE_TW like  'EMP4%' then TO_CHAR (COMPL_DTE) else '' end) as "EMP4",
+           max(case when CPNT_TITLE_TW like 'EMP5%' then TO_CHAR (COMPL_DTE) else '' end) as "EMP5",
+           max(case when CPNT_TITLE_TW like 'EMP6%' then TO_CHAR (COMPL_DTE) else '' end) as "EMP6",
+           max(case when CPNT_TITLE_TW like'EMP7%' then TO_CHAR (COMPL_DTE) else '' end) as "EMP7",
+           max(case when CPNT_TITLE_TW like 'EMP8%' then TO_CHAR (COMPL_DTE) else '' end) as "EMP8",
+           max(case when CPNT_TITLE_TW like 'EMP9%' then TO_CHAR (COMPL_DTE) else '' end) as "EMP9",
+           max(case when CPNT_TITLE_TW like 'EMP10%' then TO_CHAR (COMPL_DTE) else '' end) as "EMP10"           
+        from  
+       "ZTSMC_VIEWMODEL.db::ZTAB_LMS_EMP_TRAIN"  GROUP BY "STUD_ID") as b       
+       on
+       ( a."USERID" = b."STUD_ID" )
+   left OUTER join ( select 
+                     u."EXTERNALCODE",
+                     u."CUST_AREA" ,
+                     u."CUST_FUNCTION", 
+                     u."CUST_DIVISION", 
+                     u."CUST_DEPARTMENT",   
+                     u."DESC_ZH_CN",
+				     u."DESC_ZH_TW",
+				     u."DESC_ZH_US",
+				     u."DESC_DEFAULT",
+				     d."DESC_ZH_CN" as "AREA_DESC_CN",
+				     d."DESC_ZH_TW" as "AREA_DESC_TW",
+				     d."DESC_ZH_US" as "AREA_DESC_US",
+				     d."DESC_ZH_US" as "AREA_DEFAULT",
+				     e."DESC_ZH_CN" as "FUNC_DESC_CN",
+				     e."DESC_ZH_TW" as "FUNC_DESC_TW",
+				     e."DESC_ZH_US" as "FUNC_DESC_US",
+				     e."DESC_ZH_US" as "FUNC_DEFAULT",
+				     f."DESC_ZH_CN" as "DIVI_DESC_CN",
+				     f."DESC_ZH_TW" as "DIVI_DESC_TW",
+				     f."DESC_ZH_US" as "DIVI_DESC_US",
+				     f."DESC_ZH_US" as "DIVI_DEFAULT",
+				     g."DESC_ZH_CN" as "DEPT_DESC_CN",
+				     g."DESC_ZH_TW" as "DEPT_DESC_TW",
+				     g."DESC_ZH_US" as "DEPT_DESC_US",
+				     g."DESC_ZH_US" as "DEPT_DEFAULT"
+				     FROM  "ZTSMC_VIEWMODEL.db::ZTAB_EC_ORG_UNIT" AS u 
+				     left outer join "ZTSMC_VIEWMODEL.db::ZTAB_EC_ORG_UNIT" AS d
+				     on u."CUST_AREA" = d."EXTERNALCODE" 
+				      left outer join "ZTSMC_VIEWMODEL.db::ZTAB_EC_ORG_UNIT" AS e
+				     on u."CUST_FUNCTION" = e."EXTERNALCODE" 
+				     left outer join "ZTSMC_VIEWMODEL.db::ZTAB_EC_ORG_UNIT" AS f
+				     on u."CUST_DIVISION" = f."EXTERNALCODE" 
+				     left outer join "ZTSMC_VIEWMODEL.db::ZTAB_EC_ORG_UNIT" AS g
+				     on u."CUST_DEPARTMENT" = g."EXTERNALCODE" 				     
+				     ) as c
+   on a."DEPARTMENT" = c."EXTERNALCODE";     
+    
+END;

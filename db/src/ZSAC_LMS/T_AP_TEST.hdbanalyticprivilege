@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Privilege:analyticPrivilege xmlns:Privilege="http://www.sap.com/ndb/BiModelPrivilege.ecore" id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::T_AP_TEST" privilegeType="SQL_ANALYTIC_PRIVILEGE" schemaVersion="1.1">
+<descriptions defaultDescription="T_AP_TEST"/>
+<securedModels>
+  <modelUri>ZTSMC_VIEWMODEL.db.ZSAC_LMS::T_Hierarchy</modelUri>
+</securedModels>
+<whereSql>((&quot;ORGUNIT_Hnode&quot; = '[00100000]'))</whereSql>
+</Privilege:analyticPrivilege>

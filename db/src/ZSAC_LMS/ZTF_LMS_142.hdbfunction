@@ -1,0 +1,449 @@
+FUNCTION "ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_142"( )
+       RETURNS TABLE(
+       	"STUD_ID" NVARCHAR(90),
+       	"EMPID" NVARCHAR(32),
+       	"STUD_NAME" NVARCHAR(32),
+       	"DEPARTMENT_CODE" NVARCHAR(32),
+       	"JOBCODE_LEVEL2_DESC" NVARCHAR(90),
+       	"JOBCODE_LEVEL3_DESC" NVARCHAR(90),
+       	"TOTAL_NUMBER" INTEGER,
+       	"COMPL_NUMBER" INTEGER,
+       	"UNCOMPL_NUMBER" INTEGER,
+       	"TOTCOMPL_PERCENT" DECIMAL(17,2),
+       	"CYTOTAL_NUMBER" INTEGER,
+       	"CYCOMPL_NUMBER" INTEGER,
+       	"CYUNCOMPL_NUMBER" INTEGER,
+       	"CYONCOMPL_NUMBER" INTEGER,
+       	"EXPCOMPL_PERCENT" DECIMAL(17,2),
+        "ACTCOMPL_PERCENT" DECIMAL(17,2),
+       	"ONTCOMPL_PERCENT" DECIMAL(17,2),
+       	"TARGET_REAMIN_DAYS" INTEGER,
+       	"NEW_MONTH_3" NVARCHAR(1),
+       	"NEW_MONTH_6" NVARCHAR(1),
+       	"NEW_MONTH_9" NVARCHAR(1),
+       	"NEW_MONTH_12" NVARCHAR(1),
+       	"NEW_MONTH_24" NVARCHAR(1),
+       	"CY_TRAIN_RECORDS" INTEGER,
+       	"TGT_TRAIN_HOURS" DECIMAL(17,2),
+       	"ACT_TRAIN_HOURS" DECIMAL(17,2),
+       	"TOT_TRAIN_RECORDS" INTEGER,
+       	"TOT_TRAIN_HOURS" DECIMAL(17,2),
+       	"CYEXP_COMPL_NUMBER" INTEGER,
+       	"CYONT_COMPL_NUMBER" INTEGER,
+       	"CYREMAIN_DAYS" INTEGER
+       ) 
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+    /*****************************
+        Write your function logic
+    ****************************/
+return
+
+SELECT 
+	TOT.STUD_ID,
+	USER.EMPID,
+	USER.ZFULLNAME AS "STUD_NAME",
+	USER.DEPARTMENT_CODE,
+	USER.JOBCODE_LEVEL2_DESC,
+	USER.JOBCODE_LEVEL3_DESC,
+	--全部必修課項目縂數
+	TOT.TOTAL_NUMBER,
+	--全部必修課項目完成數
+	COM.COMPL_NUMBER,
+	--全部必修課未完成數
+	CASE
+		WHEN COM.COMPL_NUMBER IS NULL THEN TOT.TOTAL_NUMBER
+		ELSE TOT.TOTAL_NUMBER - COM.COMPL_NUMBER
+	END AS "UNCOMPL_NUMBER",
+	--全部必修課完成率
+	COM.COMPL_NUMBER / TOT.TOTAL_NUMBER AS "TOTCOMPL_PERCENT",
+	--今年度必修課縂數量
+	CYTOT.TOTAL_NUMBER AS "CYTOTAL_NUMBER",
+	--今年度必修課完成數
+	CYCOM.COMPL_NUMBER AS "CYCOMPL_NUMBER",
+	--今年度必修課未完成數
+	CYTOT.TOTAL_NUMBER - CYCOM.COMPL_NUMBER AS "CYUNCOMPL_NUMBER",
+	--今年度必修課逾期未完成數	
+	CYONCOM.ONCOMPL_NUMBER AS "CYONCOMPL_NUMBER",
+	--今年度必修課目標完成率
+	CYEXCOM.EXCOMPL_NUMBER / CYTOT.TOTAL_NUMBER AS "EXPCOMPL_PERCENT",
+	--今年度必修課實際完成率	
+	CYCOM.COMPL_NUMBER / CYTOT.TOTAL_NUMBER AS "ACTCOMPL_PERCENT",
+	--今年度必修課如期完成率	
+	CYONTCOM.ONTCOMPL_NUMBER / CYTOT.TOTAL_NUMBER AS "ONTCOMPL_PERCENT",
+	--抵達培訓目標尚餘天數	
+	CYREMDAYS.REMAIN_DAYS / ( CYTOT.TOTAL_NUMBER - CYCOM.COMPL_NUMBER ) AS "TARGET_REAMIN_DAYS",
+	CASE
+		WHEN DAYS_BETWEEN( USER.HIREDATE, CURRENT_DATE ) <= 90 THEN 'Y'
+		ELSE 'N'
+	END AS "NEW_MONTH_3",
+	CASE
+		WHEN DAYS_BETWEEN( USER.HIREDATE, CURRENT_DATE ) <= 180 THEN 'Y'
+		ELSE 'N'
+	END AS "NEW_MONTH_6",
+	CASE
+		WHEN DAYS_BETWEEN( USER.HIREDATE, CURRENT_DATE ) <= 270 THEN 'Y'
+		ELSE 'N'
+	END AS "NEW_MONTH_9",
+	CASE
+		WHEN DAYS_BETWEEN( USER.HIREDATE, CURRENT_DATE ) <= 365 THEN 'Y'
+		ELSE 'N'
+	END AS "NEW_MONTH_12",
+	CASE
+		WHEN DAYS_BETWEEN( USER.HIREDATE, CURRENT_DATE ) <= 730 THEN 'Y'
+		ELSE 'N'
+	END AS "NEW_MONTH_24",
+	--今年度訓練記錄
+	CYTR.TRAIN_RECORDS AS "CY_TRAIN_RECORDS",
+	--今年度目標訓練時數
+	CYTR.TRAIN_HOURS AS "TGT_TRAIN_HOURS",
+	--今年度實際訓練時數	
+	CYATR.TRAIN_HOURS AS "ACT_TRAIN_HOURS",
+	--全部訓練記錄	
+	TOTTR.TRAIN_RECORDS AS "TOT_TRAIN_RECORDS",
+	--全部訓練時數	
+	TOTTR.TRAIN_HOURS AS "TOT_TRAIN_HOURS",
+	--今年度必修課目標完成課程數
+	CYEXCOM.EXCOMPL_NUMBER AS "CYEXP_COMPL_NUMBER",
+	--今年度必修課如期完成課程數
+	CYONTCOM.ONTCOMPL_NUMBER AS "CYONT_COMPL_NUMBER",
+	--剩餘天數
+	CYREMDAYS.REMAIN_DAYS AS "CYREMAIN_DAYS"
+	
+FROM 
+	(
+		--全部必修課項目縂數
+		--條件：
+		--P&C：Type=Program&Curriculum；
+		--RTYP = 01;
+		--找出相應 Max(Assign date）-GROUP BY STUD ID - ID - CPNT ID
+		SELECT 
+			A.STUD_ID,
+			sum(A."NUMBER") AS TOTAL_NUMBER
+		FROM 
+			(
+				SELECT 
+					STUD_ID,
+					ID,
+					CPNT_ID,
+					max(ASSGN_DTE),
+					1 AS "NUMBER"
+				FROM "ZTSMC_VIEWMODEL.db::ZTAB_LMS_PROGRAM_CURRICULUM"
+				WHERE RTYP_ID = '01' AND OETC = 'Y'
+				GROUP BY 
+					STUD_ID,
+					ID,
+					CPNT_ID
+			) AS A
+		GROUP BY A.STUD_ID
+	) AS TOT
+	LEFT OUTER JOIN
+	(
+		--全部必修課項目完成數
+		--條件：
+		--P&C：Type=Program&Curriculum；RTYP = 01;完成狀態 = 0101，0106，0107
+		--找出相應 Max(Assign date）GROUP BY STUD ID - ID - CPNT ID
+		SELECT 
+			A.STUD_ID,
+			sum(A."NUMBER") AS COMPL_NUMBER
+		FROM 
+			(
+				SELECT 
+					STUD_ID,
+					ID,
+					CPNT_ID,
+					max(ASSGN_DTE),
+					1 AS "NUMBER"
+				FROM "ZTSMC_VIEWMODEL.db::ZTAB_LMS_PROGRAM_CURRICULUM"
+				WHERE RTYP_ID = '01'
+					AND CMPL_STAT_ID IN ('0101', '0106', '0107')
+				GROUP BY 
+					STUD_ID,
+					ID,
+					CPNT_ID
+			) AS A
+		GROUP BY A.STUD_ID
+	) AS COM
+	ON TOT.STUD_ID = COM.STUD_ID
+	LEFT OUTER JOIN
+	(
+		--今年度必修課縂數量
+		-- P&C : Type=Program&Curriculum ; 單獨課程預計完成時間 <=  Current Year）；RTYP = 01，
+		--SUM（P&C: Max(Assign date） GROUP BY STUD ID - ID - CPNT ID 
+		SELECT 
+			A.STUD_ID,
+			sum(A."NUMBER") AS TOTAL_NUMBER
+		FROM 
+			(
+				SELECT 
+					STUD_ID,
+					ID,
+					CPNT_ID,
+					max(ASSGN_DTE),
+					1 AS "NUMBER"
+				FROM "ZTSMC_VIEWMODEL.db::ZTAB_LMS_PROGRAM_CURRICULUM"
+				WHERE RTYP_ID = '01'
+					AND YEAR(CPNT_REQ_DTE) <= YEAR(CURRENT_DATE)
+				GROUP BY 
+					STUD_ID,
+					ID,
+					CPNT_ID
+			) AS A
+		GROUP BY A.STUD_ID
+	) AS CYTOT
+	ON TOT.STUD_ID = CYTOT.STUD_ID
+	LEFT OUTER JOIN
+	(
+		--今年度必修課完成數
+		--P&C: Type=Program&Curriculum ; 單獨課程預計完成時間 <=  Current Year;RTYP = 01；完成狀態 = 0101，0106，0107
+		--Max(Assign date） GROUP BY STUD ID - ID - CPNT ID 
+		SELECT 
+			A.STUD_ID,
+			sum(A."NUMBER") AS COMPL_NUMBER
+		FROM 
+			(
+				SELECT 
+					STUD_ID,
+					ID,
+					CPNT_ID,
+					max(ASSGN_DTE),
+					1 AS "NUMBER"
+				FROM "ZTSMC_VIEWMODEL.db::ZTAB_LMS_PROGRAM_CURRICULUM"
+				WHERE RTYP_ID = '01'
+					AND CMPL_STAT_ID IN ('0101', '0106', '0107')
+					AND YEAR(CPNT_REQ_DTE) <= YEAR(CURRENT_DATE)
+				GROUP BY 
+					STUD_ID,
+					ID,
+					CPNT_ID
+			) AS A
+		GROUP BY A.STUD_ID
+	) AS CYCOM
+	ON TOT.STUD_ID = CYCOM.STUD_ID
+	LEFT OUTER JOIN
+	(
+		--今年度必修課逾期未完成數（OVERDUE NOT COMPLETED）
+		--P&C:Type=Program&Curriculum ; 單獨課程預計完成時間 <=  Current Year）;（單獨課程預計完成時間 < current date ）;RTYP = 01;完成狀態 ！= 0101，0106，0107）；
+		--Max(Assign date）GROUP BY STUD ID - ID - CPNT ID 
+		SELECT 
+			A.STUD_ID,
+			sum(A."NUMBER") AS ONCOMPL_NUMBER
+		FROM 
+			(
+				SELECT 
+					STUD_ID,
+					ID,
+					CPNT_ID,
+					max(ASSGN_DTE),
+					1 AS "NUMBER"
+				FROM "ZTSMC_VIEWMODEL.db::ZTAB_LMS_PROGRAM_CURRICULUM"
+				WHERE RTYP_ID = '01'
+					AND CMPL_STAT_ID NOT IN ('0101', '0106', '0107')
+					AND YEAR(CPNT_REQ_DTE) <= YEAR(CURRENT_DATE)
+					AND COMPL_DTE < CURRENT_DATE
+				GROUP BY 
+					STUD_ID,
+					ID,
+					CPNT_ID
+			) AS A
+		GROUP BY A.STUD_ID
+	) AS CYONCOM
+	ON TOT.STUD_ID = CYONCOM.STUD_ID
+	LEFT OUTER JOIN
+	(
+		--今年度必修課預期目標完成課程數量（EXPECT COMPLETED）
+		--P&C: Type=Program&Curriculum ; 單獨課程預計完成時間 <=  Current Year）;單獨課程預計完成日期<=Current Date 的課程
+		-- Max(Assign date），GROUP BY STUD_ID - ID - CPNT ID；
+		SELECT 
+			A.STUD_ID,
+			sum(A."NUMBER") AS EXCOMPL_NUMBER
+		FROM 
+			(
+				SELECT 
+					STUD_ID,
+					ID,
+					CPNT_ID,
+					max(ASSGN_DTE),
+					1 AS "NUMBER"
+				FROM "ZTSMC_VIEWMODEL.db::ZTAB_LMS_PROGRAM_CURRICULUM"
+				WHERE RTYP_ID = '01'
+					AND YEAR(CPNT_REQ_DTE) <= YEAR(CURRENT_DATE)
+					AND CPNT_REQ_DTE < CURRENT_DATE
+				GROUP BY 
+					STUD_ID,
+					ID,
+					CPNT_ID
+			) AS A
+		GROUP BY A.STUD_ID
+	) AS CYEXCOM
+	ON TOT.STUD_ID = CYEXCOM.STUD_ID
+	LEFT OUTER JOIN
+	(
+		--今年度必修課如期完成課程數量（CURRENT YEAR ONTIME COMPLETED）
+		--P&C: Type=Program&Curriculum ; 單獨課程預計完成時間 <=  Current Year）；單獨課程預計完成時間 >=  CMPL Date ；RTYP = 01;完成狀態 = 0101，0106，0107
+		--Max(Assign date）- GROUP BY STUD ID - ID - CPNT ID ；
+		SELECT 
+			A.STUD_ID,
+			sum(A."NUMBER") AS ONTCOMPL_NUMBER
+		FROM 
+			(
+				SELECT 
+					STUD_ID,
+					ID,
+					CPNT_ID,
+					max(ASSGN_DTE),
+					1 AS "NUMBER"
+				FROM "ZTSMC_VIEWMODEL.db::ZTAB_LMS_PROGRAM_CURRICULUM"
+				WHERE RTYP_ID = '01'
+					AND YEAR(CPNT_REQ_DTE) <= YEAR(CURRENT_DATE)
+					AND CMPL_STAT_ID IN ('0101', '0106', '0107')
+					AND COMPL_DTE <= CPNT_REQ_DTE
+				GROUP BY 
+					STUD_ID,
+					ID,
+					CPNT_ID
+			) AS A
+		GROUP BY A.STUD_ID
+	) AS CYONTCOM
+	ON TOT.STUD_ID = CYONTCOM.STUD_ID
+	LEFT OUTER JOIN
+	(
+		--課程剩餘天數合計
+		--P&C: Type=Program&Curriculum ; 單獨課程預計完成時間 <=  Current Year）；CMPL_STAT_ID !=0101，0106，0107 or 單獨課程預計完成時間 >=  current date;
+		----Max(Assign date）- GROUP BY STUD ID - ID - CPNT ID ；
+		--Sum（（ID - CPNT ID - 單獨課程預計完成日期） - current date））
+		SELECT 
+			A.STUD_ID,
+			sum(A."REMAIN_DAYS") AS REMAIN_DAYS
+		FROM 
+			(
+				SELECT 
+					STUD_ID,
+					ID,
+					CPNT_ID,
+					max(ASSGN_DTE),
+					DAYS_BETWEEN( to_date(CPNT_REQ_DTE), CURRENT_DATE ) AS "REMAIN_DAYS"
+				FROM "ZTSMC_VIEWMODEL.db::ZTAB_LMS_PROGRAM_CURRICULUM"
+				WHERE RTYP_ID = '01'
+					AND YEAR(CPNT_REQ_DTE) <= YEAR(CURRENT_DATE)
+					AND (CMPL_STAT_ID NOT IN ('0101', '0106', '0107')
+					AND CURRENT_DATE <= CPNT_REQ_DTE)
+				GROUP BY 
+					STUD_ID,
+					ID,
+					CPNT_ID,
+					CPNT_REQ_DTE
+			) AS A
+		GROUP BY A.STUD_ID
+	) AS CYREMDAYS
+	ON TOT.STUD_ID = CYREMDAYS.STUD_ID
+	LEFT OUTER JOIN
+	(
+		--今年度訓練記錄/今年度目標訓練時數
+		--條件：
+		--P&C:Type=Program&Curriculum ; 單獨課程預計完成時間 <=  Current Year）;RTYP = 01 ）；
+		--SUM GROUP BY STUD ID - ID - CPNT ID
+		SELECT 
+			A.STUD_ID,
+			sum(A."RECORD") AS "TRAIN_RECORDS",
+			sum(to_number(B.CPNT_LEN)) AS "TRAIN_HOURS"
+		FROM 
+			(
+				SELECT 
+					STUD_ID,
+					ID,
+					CPNT_ID,
+					ASSGN_DTE,
+					1 AS "RECORD"
+				FROM "ZTSMC_VIEWMODEL.db::ZTAB_LMS_PROGRAM_CURRICULUM"
+				WHERE RTYP_ID = '01'
+					AND YEAR(CPNT_REQ_DTE) <= YEAR(CURRENT_DATE)
+				GROUP BY 
+					STUD_ID,
+					ID,
+					CPNT_ID,
+					ASSGN_DTE
+			) AS A
+			LEFT OUTER JOIN
+			"ZTSMC_VIEWMODEL.db::ZTAB_LMS_ITEM" AS B
+			ON A.CPNT_ID = B.CPNT_ID
+		GROUP BY A.STUD_ID
+	) AS CYTR
+	ON TOT.STUD_ID = CYTR.STUD_ID
+	LEFT OUTER JOIN
+	(
+		--今年度實際訓練時數
+		--條件：
+		--P&C:Type=Program&Curriculum ; 單獨課程預計完成時間 <=  Current Year）;RTYP = 01；CMPL_STAT_ID=0101,0106,0107 ）；
+		--SUM GROUP BY STUD ID - ID - CPNT ID
+		SELECT 
+			A.STUD_ID,
+			sum(to_number(B.CPNT_LEN)) AS "TRAIN_HOURS"
+		FROM 
+			(
+				SELECT 
+					STUD_ID,
+					ID,
+					CPNT_ID,
+					ASSGN_DTE,
+					1 AS "RECORD"
+				FROM "ZTSMC_VIEWMODEL.db::ZTAB_LMS_PROGRAM_CURRICULUM"
+				WHERE RTYP_ID = '01'
+					AND YEAR(CPNT_REQ_DTE) <= YEAR(CURRENT_DATE)
+					AND CMPL_STAT_ID IN ('0101', '0106', '0107')
+				GROUP BY 
+					STUD_ID,
+					ID,
+					CPNT_ID,
+					ASSGN_DTE
+			) AS A
+			LEFT OUTER JOIN
+			"ZTSMC_VIEWMODEL.db::ZTAB_LMS_ITEM" AS B
+			ON A.CPNT_ID = B.CPNT_ID
+		GROUP BY A.STUD_ID
+	) AS CYATR
+	ON TOT.STUD_ID = CYATR.STUD_ID
+	LEFT OUTER JOIN
+	(
+		--全部訓練記錄/全部訓練時數
+		--條件：
+		--P&C:Type=Program&Curriculum ;RTYP = 01 ）；
+		--SUM GROUP BY STUD ID - ID - CPNT ID
+		SELECT 
+			A.STUD_ID,
+			sum(A."RECORD") AS "TRAIN_RECORDS",
+			sum(B.CPNT_LEN) AS "TRAIN_HOURS"
+		FROM 
+			(
+				SELECT 
+					STUD_ID,
+					ID,
+					CPNT_ID,
+					ASSGN_DTE,
+					1 AS "RECORD"
+				FROM "ZTSMC_VIEWMODEL.db::ZTAB_LMS_PROGRAM_CURRICULUM"
+				WHERE RTYP_ID = '01'
+					AND YEAR(CPNT_REQ_DTE) <= YEAR(CURRENT_DATE)
+				GROUP BY 
+					STUD_ID,
+					ID,
+					CPNT_ID,
+					ASSGN_DTE
+			) AS A
+			LEFT OUTER JOIN
+			(
+				SELECT 
+					CPNT_ID,
+					to_number(CPNT_LEN) AS "CPNT_LEN"
+				FROM "ZTSMC_VIEWMODEL.db::ZTAB_LMS_ITEM"
+			) AS B
+			ON A.CPNT_ID = B.CPNT_ID
+		GROUP BY A.STUD_ID
+	) AS "TOTTR"
+	ON TOT.STUD_ID = TOTTR.STUD_ID
+	LEFT OUTER JOIN
+	"ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_USER"('US') AS USER
+	ON TOT.STUD_ID = USER.USERID;
+
+END;

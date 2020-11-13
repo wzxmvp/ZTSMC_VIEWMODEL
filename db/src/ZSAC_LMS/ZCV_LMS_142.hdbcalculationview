@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZCV_LMS_142" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="ZCV_LMS_142"/>
+<localVariables>
+  <variable id="LANGUAGE" parameter="true">
+    <descriptions defaultDescription="Language"/>
+    <variableProperties datatype="NVARCHAR" length="2" mandatory="false">
+      <valueDomain type="StaticList">
+        <listEntry id="TW">
+          <descriptions defaultDescription="TW"/>
+        </listEntry>
+        <listEntry id="CN">
+          <descriptions defaultDescription="CN"/>
+        </listEntry>
+        <listEntry id="US">
+          <descriptions defaultDescription="US"/>
+        </listEntry>
+        <listEntry id="DF">
+          <descriptions defaultDescription="DF"/>
+        </listEntry>
+      </valueDomain>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+  <variable id="VALID_DATE" parameter="true">
+    <descriptions defaultDescription="Org Valid Date"/>
+    <variableProperties datatype="DATE" mandatory="false" defaultValue="2020-10-19">
+      <valueDomain type="Date"/>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU">
+    <targetVariable name="LANGUAGE" resourceUri="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU"/>
+    <localVariable>LANGUAGE</localVariable>
+  </mapping>
+</variableMappings>
+<dataSources>
+  <DataSource id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_142" type="TABLE_FUNCTION">
+    <resourceUri>ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_142</resourceUri>
+  </DataSource>
+  <DataSource id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU" type="TABLE_FUNCTION">
+    <resourceUri>ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="STUD_ID"/>
+      <viewAttribute id="TOT_TRAIN_RECORDS"/>
+      <viewAttribute id="CYONCOMPL_NUMBER"/>
+      <viewAttribute id="UNCOMPL_NUMBER"/>
+      <viewAttribute id="NEW_MONTH_6"/>
+      <viewAttribute id="COMPL_NUMBER"/>
+      <viewAttribute id="ACT_TRAIN_HOURS"/>
+      <viewAttribute id="CYUNCOMPL_NUMBER"/>
+      <viewAttribute id="CYCOMPL_NUMBER"/>
+      <viewAttribute id="NEW_MONTH_3"/>
+      <viewAttribute id="TOTAL_NUMBER"/>
+      <viewAttribute id="TGT_TRAIN_HOURS"/>
+      <viewAttribute id="CYTOTAL_NUMBER"/>
+      <viewAttribute id="TARGET_REAMIN_DAYS"/>
+      <viewAttribute id="JOBCODE_LEVEL3_DESC"/>
+      <viewAttribute id="CY_TRAIN_RECORDS"/>
+      <viewAttribute id="TOTCOMPL_PERCENT"/>
+      <viewAttribute id="ONTCOMPL_PERCENT"/>
+      <viewAttribute id="JOBCODE_LEVEL2_DESC"/>
+      <viewAttribute id="NEW_MONTH_24"/>
+      <viewAttribute id="ACTCOMPL_PERCENT"/>
+      <viewAttribute id="DEPARTMENT_CODE"/>
+      <viewAttribute id="NEW_MONTH_12"/>
+      <viewAttribute id="STUD_NAME"/>
+      <viewAttribute id="TOT_TRAIN_HOURS"/>
+      <viewAttribute id="EXPCOMPL_PERCENT"/>
+      <viewAttribute id="NEW_MONTH_9"/>
+    
+      <viewAttribute id="EMPID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_LMS_142"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="REPORT_FUNCTION"/>
+      <viewAttribute id="REPORT_FUNCTION_DESC"/>
+      <viewAttribute id="REPORT_DIVISION"/>
+      <viewAttribute id="REPORT_DIVISION_DESC"/>
+      <viewAttribute id="REPORT_DEPARTMENT"/>
+      <viewAttribute id="REPORT_DEPARTMENT_DESC"/>
+      <viewAttribute id="REPORT_SECTION"/>
+      <viewAttribute id="REPORT_SECTION_DESC"/>
+      <viewAttribute id="EXTERNALCODE"/>
+      <viewAttribute id="EXTERNALCODE_DESC"/>
+      <viewAttribute id="PARENTDEPARTMENT"/>
+      <viewAttribute id="EFFECTIVESTARTDATE"/>
+      <viewAttribute id="EFFECTIVEENDDATE"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="ZTSMC_VIEWMODEL.db.ZSAC_LMS::ZTF_EC_OU"/>
+    <filter>&quot;EFFECTIVESTARTDATE&quot; &lt;= '$$VALID_DATE$$' AND '$$VALID_DATE$$' &lt;= &quot;EFFECTIVEENDDATE&quot;</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="rightOuter">
+    <viewAttributes>
+      <viewAttribute id="STUD_ID"/>
+      <viewAttribute id="TOT_TRAIN_RECORDS" aggregationType="sum"/>
+      <viewAttribute id="CYONCOMPL_NUMBER" aggregationType="sum"/>
+      <viewAttribute id="UNCOMPL_NUMBER" aggregationType="sum"/>
+      <viewAttribute id="NEW_MONTH_6"/>
+      <viewAttribute id="COMPL_NUMBER" aggregationType="sum"/>
+      <viewAttribute id="ACT_TRAIN_HOURS" aggregationType="sum"/>
+      <viewAttribute id="CYUNCOMPL_NUMBER" aggregationType="sum"/>
+      <viewAttribute id="CYCOMPL_NUMBER" aggregationType="sum"/>
+      <viewAttribute id="NEW_MONTH_3"/>
+      <viewAttribute id="TOTAL_NUMBER" aggregationType="sum"/>
+      <viewAttribute id="TGT_TRAIN_HOURS" aggregationType="sum"/>
+      <viewAttribute id="CYTOTAL_NUMBER" aggregationType="sum"/>
+      <viewAttribute id="TARGET_REAMIN_DAYS" aggregationType="sum"/>
+      <viewAttribute id="JOBCODE_LEVEL3_DESC"/>
+      <viewAttribute id="CY_TRAIN_RECORDS" aggregationType="sum"/>
+      <viewAttribute id="TOTCOMPL_PERCENT" aggregationType="sum"/>
+      <viewAttribute id="ONTCOMPL_PERCENT" aggregationType="sum"/>
+      <viewAttribute id="JOBCODE_LEVEL2_DESC"/>
+      <viewAttribute id="NEW_MONTH_24"/>
+      <viewAttribute id="ACTCOMPL_PERCENT" aggregationType="sum"/>
+      <viewAttribute id="DEPARTMENT_CODE"/>
+      <viewAttribute id="NEW_MONTH_12"/>
+      <viewAttribute id="STUD_NAME"/>
+      <viewAttribute id="TOT_TRAIN_HOURS" aggregationType="sum"/>
+      <viewAttribute id="EXPCOMPL_PERCENT" aggregationType="sum"/>
+      <viewAttribute id="NEW_MONTH_9"/>
+      <viewAttribute id="REPORT_FUNCTION"/>
+      <viewAttribute id="REPORT_FUNCTION_DESC"/>
+      <viewAttribute id="REPORT_DIVISION"/>
+      <viewAttribute id="REPORT_DIVISION_DESC"/>
+      <viewAttribute id="REPORT_DEPARTMENT"/>
+      <viewAttribute id="REPORT_DEPARTMENT_DESC"/>
+      <viewAttribute id="REPORT_SECTION"/>
+      <viewAttribute id="REPORT_SECTION_DESC"/>
+      <viewAttribute id="EXTERNALCODE"/>
+      <viewAttribute id="EXTERNALCODE_DESC"/>
+      <viewAttribute id="PARENTDEPARTMENT"/>
+    
+      <viewAttribute id="EMPID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="STUD_ID" source="STUD_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOT_TRAIN_RECORDS" source="TOT_TRAIN_RECORDS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CYONCOMPL_NUMBER" source="CYONCOMPL_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="UNCOMPL_NUMBER" source="UNCOMPL_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NEW_MONTH_6" source="NEW_MONTH_6"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMPL_NUMBER" source="COMPL_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ACT_TRAIN_HOURS" source="ACT_TRAIN_HOURS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CYUNCOMPL_NUMBER" source="CYUNCOMPL_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CYCOMPL_NUMBER" source="CYCOMPL_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NEW_MONTH_3" source="NEW_MONTH_3"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOTAL_NUMBER" source="TOTAL_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TGT_TRAIN_HOURS" source="TGT_TRAIN_HOURS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CYTOTAL_NUMBER" source="CYTOTAL_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TARGET_REAMIN_DAYS" source="TARGET_REAMIN_DAYS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOBCODE_LEVEL3_DESC" source="JOBCODE_LEVEL3_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CY_TRAIN_RECORDS" source="CY_TRAIN_RECORDS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOTCOMPL_PERCENT" source="TOTCOMPL_PERCENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ONTCOMPL_PERCENT" source="ONTCOMPL_PERCENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOBCODE_LEVEL2_DESC" source="JOBCODE_LEVEL2_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NEW_MONTH_24" source="NEW_MONTH_24"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ACTCOMPL_PERCENT" source="ACTCOMPL_PERCENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENT_CODE" source="DEPARTMENT_CODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NEW_MONTH_12" source="NEW_MONTH_12"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STUD_NAME" source="STUD_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOT_TRAIN_HOURS" source="TOT_TRAIN_HOURS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EXPCOMPL_PERCENT" source="EXPCOMPL_PERCENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NEW_MONTH_9" source="NEW_MONTH_9"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMPID" source="EMPID"/>
+    </input>
+    <input node="Projection_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_FUNCTION" source="REPORT_FUNCTION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_FUNCTION_DESC" source="REPORT_FUNCTION_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_DIVISION" source="REPORT_DIVISION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_DIVISION_DESC" source="REPORT_DIVISION_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_DEPARTMENT" source="REPORT_DEPARTMENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_DEPARTMENT_DESC" source="REPORT_DEPARTMENT_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_SECTION" source="REPORT_SECTION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REPORT_SECTION_DESC" source="REPORT_SECTION_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EXTERNALCODE" source="EXTERNALCODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EXTERNALCODE_DESC" source="EXTERNALCODE_DESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PARENTDEPARTMENT" source="PARENTDEPARTMENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENT_CODE" source="EXTERNALCODE"/>
+    </input>
+    <joinAttribute name="DEPARTMENT_CODE"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="REPORT_FUNCTION" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_FUNCTION"/>
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_FUNCTION"/>
+    </attribute>
+    <attribute id="REPORT_FUNCTION_DESC" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="功能組織名稱"/>
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_FUNCTION_DESC"/>
+    </attribute>
+    <attribute id="REPORT_DIVISION" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DIVISION"/>
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_DIVISION"/>
+    </attribute>
+    <attribute id="REPORT_DIVISION_DESC" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="廠/處名稱"/>
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_DIVISION_DESC"/>
+    </attribute>
+    <attribute id="REPORT_DEPARTMENT" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REPORT_DEPARTMENT"/>
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_DEPARTMENT"/>
+    </attribute>
+    <attribute id="REPORT_DEPARTMENT_DESC" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="部門名稱"/>
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_DEPARTMENT_DESC"/>
+    </attribute>
+    <attribute id="REPORT_SECTION" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="課級組織代碼"/>
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_SECTION"/>
+    </attribute>
+    <attribute id="REPORT_SECTION_DESC" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="課級組織名稱"/>
+      <keyMapping columnObjectName="Join_1" columnName="REPORT_SECTION_DESC"/>
+    </attribute>
+    <attribute id="STUD_ID" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="用戶ID"/>
+      <keyMapping columnObjectName="Join_1" columnName="STUD_ID"/>
+    </attribute>
+    <attribute id="EMPID" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="工號"/>
+      <keyMapping columnObjectName="Join_1" columnName="EMPID"/>
+    </attribute>
+    <attribute id="STUD_NAME" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="姓名"/>
+      <keyMapping columnObjectName="Join_1" columnName="STUD_NAME"/>
+    </attribute>
+    <attribute id="JOBCODE_LEVEL2_DESC" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="工作职能"/>
+      <keyMapping columnObjectName="Join_1" columnName="JOBCODE_LEVEL2_DESC"/>
+    </attribute>
+    <attribute id="JOBCODE_LEVEL3_DESC" order="13" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="工作分类"/>
+      <keyMapping columnObjectName="Join_1" columnName="JOBCODE_LEVEL3_DESC"/>
+    </attribute>
+    <attribute id="NEW_MONTH_3" order="26" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="3個月內 新人(Y/N)?"/>
+      <keyMapping columnObjectName="Join_1" columnName="NEW_MONTH_3"/>
+    </attribute>
+    <attribute id="NEW_MONTH_6" order="27" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="6個月內 新人(Y/N)?"/>
+      <keyMapping columnObjectName="Join_1" columnName="NEW_MONTH_6"/>
+    </attribute>
+    <attribute id="NEW_MONTH_9" order="28" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="9個月內 新人(Y/N)?"/>
+      <keyMapping columnObjectName="Join_1" columnName="NEW_MONTH_9"/>
+    </attribute>
+    <attribute id="NEW_MONTH_12" order="29" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="12個月內 新人(Y/N)?"/>
+      <keyMapping columnObjectName="Join_1" columnName="NEW_MONTH_12"/>
+    </attribute>
+    <attribute id="NEW_MONTH_24" order="30" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="24個月內 新人(Y/N)?"/>
+      <keyMapping columnObjectName="Join_1" columnName="NEW_MONTH_24"/>
+    </attribute>
+    <attribute id="DEPARTMENT_CODE" order="36" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DEPARTMENT_CODE"/>
+      <keyMapping columnObjectName="Join_1" columnName="DEPARTMENT_CODE"/>
+    </attribute>
+    <attribute id="EXTERNALCODE" order="37" descriptionColumnName="EXTERNALCODE_DESC" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EXTERNALCODE"/>
+      <keyMapping columnObjectName="Join_1" columnName="EXTERNALCODE"/>
+    </attribute>
+    <attribute id="EXTERNALCODE_DESC" order="38" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EXTERNALCODE_DESC"/>
+      <keyMapping columnObjectName="Join_1" columnName="EXTERNALCODE_DESC"/>
+    </attribute>
+    <attribute id="PARENTDEPARTMENT" order="39" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PARENTDEPARTMENT"/>
+      <keyMapping columnObjectName="Join_1" columnName="PARENTDEPARTMENT"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="TOTAL_NUMBER" order="14" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="全部必修課項目縂數"/>
+      <measureMapping columnObjectName="Join_1" columnName="TOTAL_NUMBER"/>
+    </measure>
+    <measure id="COMPL_NUMBER" order="15" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="全部必修課項目完成數"/>
+      <measureMapping columnObjectName="Join_1" columnName="COMPL_NUMBER"/>
+    </measure>
+    <measure id="UNCOMPL_NUMBER" order="16" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="全部必修課未完成數"/>
+      <measureMapping columnObjectName="Join_1" columnName="UNCOMPL_NUMBER"/>
+    </measure>
+    <measure id="TOTCOMPL_PERCENT" order="17" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="全部必修課完成率"/>
+      <measureMapping columnObjectName="Join_1" columnName="TOTCOMPL_PERCENT"/>
+    </measure>
+    <measure id="CYTOTAL_NUMBER" order="18" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="今年度必修課縂數量"/>
+      <measureMapping columnObjectName="Join_1" columnName="CYTOTAL_NUMBER"/>
+    </measure>
+    <measure id="CYCOMPL_NUMBER" order="19" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="今年度必修課完成數"/>
+      <measureMapping columnObjectName="Join_1" columnName="CYCOMPL_NUMBER"/>
+    </measure>
+    <measure id="CYUNCOMPL_NUMBER" order="20" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="今年度必修課未完成數"/>
+      <measureMapping columnObjectName="Join_1" columnName="CYUNCOMPL_NUMBER"/>
+    </measure>
+    <measure id="CYONCOMPL_NUMBER" order="21" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="今年度必修課逾期未完成數"/>
+      <measureMapping columnObjectName="Join_1" columnName="CYONCOMPL_NUMBER"/>
+    </measure>
+    <measure id="EXPCOMPL_PERCENT" order="22" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="今年度必修課目標完成率"/>
+      <measureMapping columnObjectName="Join_1" columnName="EXPCOMPL_PERCENT"/>
+    </measure>
+    <measure id="ACTCOMPL_PERCENT" order="23" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="今年度必修課實際完成率"/>
+      <measureMapping columnObjectName="Join_1" columnName="ACTCOMPL_PERCENT"/>
+    </measure>
+    <measure id="ONTCOMPL_PERCENT" order="24" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="今年度必修課如期完成率"/>
+      <measureMapping columnObjectName="Join_1" columnName="ONTCOMPL_PERCENT"/>
+    </measure>
+    <measure id="TARGET_REAMIN_DAYS" order="25" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="抵達培訓目標尚餘天數"/>
+      <measureMapping columnObjectName="Join_1" columnName="TARGET_REAMIN_DAYS"/>
+    </measure>
+    <measure id="CY_TRAIN_RECORDS" order="31" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="今年度訓練記錄"/>
+      <measureMapping columnObjectName="Join_1" columnName="CY_TRAIN_RECORDS"/>
+    </measure>
+    <measure id="TGT_TRAIN_HOURS" order="32" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="今年度目標訓練時數"/>
+      <measureMapping columnObjectName="Join_1" columnName="TGT_TRAIN_HOURS"/>
+    </measure>
+    <measure id="ACT_TRAIN_HOURS" order="33" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="今年度實際訓練時數"/>
+      <measureMapping columnObjectName="Join_1" columnName="ACT_TRAIN_HOURS"/>
+    </measure>
+    <measure id="TOT_TRAIN_RECORDS" order="34" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="全部訓練記錄"/>
+      <measureMapping columnObjectName="Join_1" columnName="TOT_TRAIN_RECORDS"/>
+    </measure>
+    <measure id="TOT_TRAIN_HOURS" order="35" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="全部訓練時數"/>
+      <measureMapping columnObjectName="Join_1" columnName="TOT_TRAIN_HOURS"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions>
+    <localDimension id="ORGUNIT_H">
+      <attributeRef xsi:type="DataFoundation:Attribute">EXTERNALCODE</attributeRef>
+      <attributeRef xsi:type="DataFoundation:Attribute">PARENTDEPARTMENT</attributeRef>
+      <hierarchies>
+        <hierarchy xsi:type="Dimension:ParentChildHierarchy" id="ORGUNIT_H" aggregateAllNodes="false" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE_IF_DEFINED" cacheEnabled="true" cycleHandling="BREAKUP" emptyValueIsNull="false">
+          <descriptions defaultDescription="ORGUNIT_H"/>
+          <unassignedMemberProperties mode="FALSE"/>
+          <attributeParentPair attribute="EXTERNALCODE" parentAttribute="PARENTDEPARTMENT"/>
+        </hierarchy>
+      </hierarchies>
+    </localDimension>
+  </localDimensions>
+  <sharedDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="221" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="356"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302" y="356"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="221" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="222"/>
+    </shape>
+    <shape modelObjectName="Projection_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="249"/>
+    </shape>
+    <shape modelObjectName="Join_1" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

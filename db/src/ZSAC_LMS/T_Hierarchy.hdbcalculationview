@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="ZTSMC_VIEWMODEL.db.ZSAC_LMS::T_Hierarchy" applyPrivilegeType="SQL_ANALYTIC_PRIVILEGE" dataCategory="CUBE" schemaVersion="3.0" cacheInvalidationPeriod="NONE" enforceSqlExecution="false" hierarchiesSQLEnabled="true">
+<descriptions defaultDescription="T_Hierarchy"/>
+<localVariables>
+  <variable id="VALID_DATE" parameter="true">
+    <descriptions defaultDescription="Org Valid Date"/>
+    <variableProperties datatype="DATE" mandatory="false" defaultValue="2020-9-29">
+      <valueDomain type="Date"/>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings>
+  <mapping xsi:type="Variable:VariableMapping" forStarJoin="true">
+    <targetVariable name="VALID_DATE" resourceUri="ZTSMC_VIEWMODEL.db.ZSAC_LMS::T_DIMENSION_H"/>
+    <localVariable>VALID_DATE</localVariable>
+  </mapping>
+</variableMappings>
+<dataSources>
+  <DataSource id="ZTSMC_VIEWMODEL.db::ZTAB_EC_USER">
+    <resourceUri>ZTSMC_VIEWMODEL.db::ZTAB_EC_USER</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="DEPARTMENT"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="Number" datatype="INTEGER" expressionLanguage="SQL">
+        <formula>1</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="ZTSMC_VIEWMODEL.db::ZTAB_EC_USER"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Projection_1">
+  <attributes>
+    <attribute id="DEPARTMENT" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Department"/>
+      <keyMapping columnObjectName="Projection_1" columnName="DEPARTMENT"/>
+    </attribute>
+    <attribute id="DEPARTMENT$local">
+      <keyMapping columnObjectName="Projection_1" columnName="DEPARTMENT"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="Number" order="1" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Number"/>
+      <measureMapping columnObjectName="Projection_1" columnName="Number"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+  <sharedDimensions>
+    <logicalJoin associatedObjectUri="ZTSMC_VIEWMODEL.db.ZSAC_LMS::T_DIMENSION_H">
+      <attributes>
+        <attributeRef>DEPARTMENT$local</attributeRef>
+      </attributes>
+      <associatedAttributeNames>
+        <attributeName>EXTERNALCODE</attributeName>
+      </associatedAttributeNames>
+      <properties cardinality="CN_N" joinType="leftOuter" joinOperator="Equal"/>
+      <associatedAttributeFeatures/>
+      <associatedHierarchyFeature hierarchyName="ORGUNIT_H">
+        <joinProperties nodeElementName="ORGUNIT_Hnode" expressionParameterName="ORGUNIT_Hexpr"/>
+      </associatedHierarchyFeature>
+    </logicalJoin>
+  </sharedDimensions>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="92" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="232"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="160"/>
+    </shape>
+    <shape modelObjectName="ZTSMC_VIEWMODEL.db.ZSAC_LMS::T_DIMENSION_H" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="352"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
